@@ -12,10 +12,25 @@ class Square extends React.Component {
 }
 
 class Board extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+        board_data : Array(8).fill(null)
+    };
+  }
+
+  renderSquare(){
+    return (
+      <Square />
+    );
+  }
+
   render(){
     return(
       <div>
         <div>This is status</div>
+        {this.renderSquare()}
       </div>
     )
   }
