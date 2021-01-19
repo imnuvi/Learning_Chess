@@ -20,15 +20,32 @@ class Board extends React.Component {
     };
   }
 
+  join_row(row){
+    let end_row = [];
+    for (let i of row){
+      end_row.push(<Square />)
+    }
+    end_row.shift(<p>hello there</p>)
+    return end_row
+  }
+
   renderBoard(){
     let dupe_data = this.state.board_data.slice();
-    dupe_data = dupe_data.map((row,i) => {
-      return row.map((squ,i) => {
-          return <Square />
-        })
-    });
+    let mod_data = dupe_data.map((row) => {
+      return this.join_row(row);
+    })
+    // dupe_data = dupe_data.map((row,i) => {
+    //   return row.map((squ,j) => {
+    //       return <Square />
+    //     })
+    // });
+    // let mod_data = dupe_data.reduce((tot,row) => {
+    //   return (
+    //     <Square></Square>
+    //   )
+    // });
     return (
-      <div>{dupe_data}</div>
+      <div>{mod_data}</div>
     );
   }
 
