@@ -16,13 +16,19 @@ class Board extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        board_data : Array(8).fill(null)
+        board_data : new Array(8).fill(null).map(() => new Array(8).fill(null))
     };
   }
 
-  renderSquare(){
+  renderBoard(){
+    let dupe_data = this.state.board_data.slice();
+    dupe_data = dupe_data.map((row,i) => {
+      return row.map((squ,i) => {
+          return <Square />
+        })
+    });
     return (
-      <Square />
+      <div>{dupe_data}</div>
     );
   }
 
@@ -30,7 +36,7 @@ class Board extends React.Component {
     return(
       <div>
         <div>This is status</div>
-        {this.renderSquare()}
+        {this.renderBoard()}
       </div>
     )
   }
