@@ -29,9 +29,9 @@ class Board extends React.Component {
       <div>
         {dupe_data.map((row,i) => {
             return (
-              <div className="board-row">
+              <div className="board-row" key={i} row={i}>
                 {row.map((block,j) => {
-                  return <Square />;
+                  return <Square key={i*10 + j} row={i} column={j}/>;
                 })}
               </div>
             );
