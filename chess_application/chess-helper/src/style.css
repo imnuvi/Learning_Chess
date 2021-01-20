@@ -21,11 +21,15 @@ body {
 .Board {
   display: flex;
   flex-direction: column;
+  width: fit-content;
+  margin: auto;
 }
 
 .board-row {
-  display: inline-block;
+  display: inline-flex;
   width: fit-content;
+  white-space: normal;
+  overflow: hidden;
 }
 
 .square {
@@ -34,6 +38,15 @@ body {
   border: 1px solid #999;
   float: left;
 }
+
+.black-square {
+  background: #222;
+}
+
+.white-square {
+  background: #eee;
+}
+
 
 .game {
   display: flex;
