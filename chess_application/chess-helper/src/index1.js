@@ -147,3 +147,14 @@ function calculateWinner(squares) {
   }
   return "draw";
 }
+
+
+
+new Promise((resolve,reject) => {
+  if (){
+    resolve(array);
+  }
+  else{
+    reject("error");
+  }
+})
