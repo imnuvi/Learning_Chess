@@ -1,0 +1,22 @@
+html, head, body, div, title, p, h1, h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+}
+
+.status {
+  margin-bottom: 10px;
+  color: white
+}
+
+.square {
+  
+}
