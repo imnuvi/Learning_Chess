@@ -5,8 +5,7 @@ import ReactDOM from 'react-dom';
 class Square extends React.Component {
   render(){
     return(
-      <div className={ `square ${((this.props.row+this.props.column)%2 == 0) ? "white-square" : "black-square"}` } >
-
+      <div className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
       </div>
     );
   }
@@ -27,7 +26,7 @@ class Board extends React.Component {
     //
     // })
     return (
-      <div>
+      <div className="Board">
         {dupe_data.map((row,i) => {
             return (
               <div className="board-row" key={i} row={i}>
