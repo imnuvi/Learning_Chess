@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom';
 class Square extends React.Component {
   render(){
     return(
-      <div className='square'>
+      <div className={ `square ${((this.props.row+this.props.column)%2 == 0) ? "white-square" : "black-square"}` } >
+
       </div>
     );
   }

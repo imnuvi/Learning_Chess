@@ -33,6 +33,14 @@ ol, ul {
   text-align: center;
 }
 
+.black-square {
+  background: #222;
+}
+
+.white-square {
+  background: #eee;
+}
+
 .square:focus {
   outline: none;
 }
