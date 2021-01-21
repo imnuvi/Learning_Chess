@@ -2,10 +2,13 @@ import './style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import white_queen from './chess_icons/white_queen.png'
+
 class Square extends React.Component {
   render(){
     return(
       <div className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
+        <img src={white_queen}></img>
       </div>
     );
   }
