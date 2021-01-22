@@ -2,13 +2,25 @@ import './style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import white_queen from './chess_icons/white_queen.png'
-import black_queen from './chess_icons/black_queen.png'
+import white_bishop from './chess_icons/white_bishop.png';
+import white_knight from './chess_icons/white_knight.png';
+import white_rookh from './chess_icons/white_rookh.png';
+import white_king from './chess_icons/white_king.png';
+import white_queen from './chess_icons/white_queen.png';
+import white_pawn from './chess_icons/white_pawn.png';
+
+import black_bishop from './chess_icons/black_bishop.png';
+import black_knight from './chess_icons/black_knight.png';
+import black_rookh from './chess_icons/black_rookh.png';
+import black_king from './chess_icons/black_king.png';
+import black_queen from './chess_icons/black_queen.png';
+import black_pawn from './chess_icons/black_pawn.png';
+
 
 class Square extends React.Component {
   render(){
     console.log(black_queen);
-    let val = ((Math.random() > 0.5) ? white_queen : black_queen);
+    let val = ((Math.random() > 0.5) ? white_pawn : black_king);
     console.log(val);
     return(
       <div className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
