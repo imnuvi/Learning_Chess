@@ -19,12 +19,9 @@ import black_pawn from './chess_icons/black_pawn.png';
 
 class Square extends React.Component {
   render(){
-    console.log(black_queen);
-    let val = ((Math.random() > 0.5) ? white_pawn : black_king);
-    console.log(val);
     return(
       <div className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
-        <img alt="this is queen" src={val}></img>
+        <img alt="this is queen" src={black_bishop}></img>
       </div>
     );
   }
