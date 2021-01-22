@@ -3,12 +3,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import white_queen from './chess_icons/white_queen.png'
+import black_queen from './chess_icons/black_queen.png'
 
 class Square extends React.Component {
   render(){
+    console.log(black_queen);
+    let val = ((Math.random() > 0.5) ? white_queen : black_queen);
+    console.log(val);
     return(
       <div className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
-        <img src={white_queen}></img>
+        <img alt="this is queen" src={val}></img>
       </div>
     );
   }
