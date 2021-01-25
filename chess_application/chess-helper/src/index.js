@@ -21,7 +21,7 @@ class Square extends React.Component {
   render(){
     return(
       <div className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
-        <img alt="this is queen" src={black_bishop}></img>
+        <img alt="this is queen" src={white_pawn}></img>
       </div>
     );
   }
