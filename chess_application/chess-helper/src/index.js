@@ -41,9 +41,7 @@ class Board extends React.Component {
 
   renderBoard(){
     let dupe_data = this.state.board_data.slice();
-    // let mod_data = dupe_data.map((row,i) => {
-    //
-    // })
+    console.log(this.state.board_data);
     return (
       <div className="Board">
         {dupe_data.map((row,i) => {
