@@ -19,9 +19,12 @@ import black_pawn from './chess_icons/black_pawn.png';
 
 class Square extends React.Component {
   render(){
+
+    const piece = (this.props.value != null) ? (<div className={ `piece ${this.props.value}`} ></div>) : (null);
+
     return(
       <div className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
-        <img alt="this is queen" src={white_pawn}></img>
+          {piece}
       </div>
     );
   }
@@ -47,7 +50,7 @@ class Board extends React.Component {
             return (
               <div className="board-row" key={i} row={i}>
                 {row.map((block,j) => {
-                  return <Square key={i*10 + j} row={i} column={j}/>;
+                  return <Square key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]}/>;
                 })}
               </div>
             );
