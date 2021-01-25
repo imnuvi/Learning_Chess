@@ -35,13 +35,12 @@ class Board extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        board_data : new Array(8).fill(null).map(() => new Array(8).fill(null))
+        board_data : new Array(8).fill(null).map(() => new Array(8).fill("wb"))
     };
   }
 
   renderBoard(){
     let dupe_data = this.state.board_data.slice();
-    console.log(this.state.board_data);
     return (
       <div className="Board">
         {dupe_data.map((row,i) => {
