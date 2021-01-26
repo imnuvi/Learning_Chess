@@ -70,7 +70,7 @@ body {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;
-  background-image: url("../chess_icons/white_knight.png");
+  background-image: url("../chess_icons/32bit/white_knight.png");
 }
 
 /*# sourceMappingURL=style.css.map */
