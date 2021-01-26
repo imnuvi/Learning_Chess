@@ -35,7 +35,7 @@ class Board extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        board_data : new Array(8).fill(null).map(() => new Array(8).fill("wb"))
+        board_data : new Array(8).fill(null).map(() => new Array(8).fill("wbi"))
     };
   }
 

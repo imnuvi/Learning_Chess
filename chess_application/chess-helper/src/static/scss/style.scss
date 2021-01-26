@@ -1,3 +1,15 @@
+
+// variables
+$piece_style : '32bit';
+$wbi: 'white_bishop';
+$wro: 'white_rookh';
+$wkn: 'white_knight';
+$wki: 'white_king';
+$wqu: 'white_queen';
+$wpa: 'white_pawn';
+
+
+// general resets
 html, head, body, div, title, p, h1, h2 {
   margin: 0;
   padding: 0;
@@ -20,6 +32,14 @@ body {
   color: white
 }
 
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+
+// board styles
 .Board {
   display: flex;
   flex-direction: column;
@@ -56,21 +76,17 @@ body {
   background: #feffd6;
 }
 
-
-.game {
-  display: flex;
-  flex-direction: row;
-}
-
+// pieces styling
 .piece {
   width: 100%;
   height: 100%;
   /* background: yellow; */
-}
 
-.wb {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;
-  background-image: url('../chess_icons/32bit/white_knight.png');
+}
+
+.wbi {
+  background-image: url('../chess_icons/#{$piece_style}/#{$wbi}.png');
 }
