@@ -94,6 +94,14 @@ body {
   image-rendering: pixelated;
 }
 
+.piece:hover {
+  cursor: grab;
+}
+
+.piece:active {
+  cursor: grabbing;
+}
+
 // piece specifications
 
 .wbi {
