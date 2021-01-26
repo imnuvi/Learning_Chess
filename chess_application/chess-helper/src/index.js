@@ -39,6 +39,10 @@ class Board extends React.Component {
     };
   }
 
+  renderSquare(i,j){
+    return <Square  key={i*10 + j} id={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]}/>;
+  }
+
   renderBoard(){
     let dupe_data = this.state.board_data.slice();
     return (
@@ -47,7 +51,7 @@ class Board extends React.Component {
             return (
               <div className="board-row" key={i} row={i}>
                 {row.map((block,j) => {
-                  return <Square  key={i*10 + j} id={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]}/>;
+                  return this.renderSquare(i,j);
                 })}
               </div>
             );
