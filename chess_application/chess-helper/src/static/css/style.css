@@ -73,4 +73,48 @@ body {
   background-image: url("../chess_icons/32bit/white_bishop.png");
 }
 
+.wro {
+  background-image: url("../chess_icons/32bit/white_rookh.png");
+}
+
+.wkn {
+  background-image: url("../chess_icons/32bit/white_knight.png");
+}
+
+.wki {
+  background-image: url("../chess_icons/32bit/white_king.png");
+}
+
+.wqu {
+  background-image: url("../chess_icons/32bit/white_queen.png");
+}
+
+.wpa {
+  background-image: url("../chess_icons/32bit/white_pawn.png");
+}
+
+.bbi {
+  background-image: url("../chess_icons/32bit/black_bishop.png");
+}
+
+.bro {
+  background-image: url("../chess_icons/32bit/black_rookh.png");
+}
+
+.bkn {
+  background-image: url("../chess_icons/32bit/black_knight.png");
+}
+
+.bki {
+  background-image: url("../chess_icons/32bit/black_king.png");
+}
+
+.bqu {
+  background-image: url("../chess_icons/32bit/black_queen.png");
+}
+
+.bpa {
+  background-image: url("../chess_icons/32bit/black_pawn.png");
+}
+
 /*# sourceMappingURL=style.css.map */
