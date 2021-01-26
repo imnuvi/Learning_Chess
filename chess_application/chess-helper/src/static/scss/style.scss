@@ -13,10 +13,11 @@ body {
   text-align: center;
 }
 
+
 .status {
   margin: auto;
   margin-bottom: 10px;
-  color: white;
+  color: white
 }
 
 .Board {
@@ -55,6 +56,7 @@ body {
   background: #feffd6;
 }
 
+
 .game {
   display: flex;
   flex-direction: row;
@@ -70,7 +72,5 @@ body {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;
-  background-image: url("../chess_icons/white_knight.png");
+  background-image: url('../chess_icons/white_knight.png');
 }
-
-/*# sourceMappingURL=style.css.map */
