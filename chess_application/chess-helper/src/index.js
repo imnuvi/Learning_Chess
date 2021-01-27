@@ -38,53 +38,53 @@ function board_reset(board){
   let newb = new Array(8).fill(null).map(() => new Array(8).fill(null));
   for (let i=0; i<board.length; i++){
     for (let j=0; j<board[0].length; j++){
-      if (i==1){
+      if (i===1){
         newb[i][j] = "bpa";
       }
-      if (i==6){
+      if (i===6){
         newb[i][j] = "wpa";
       }
-      if (j==0 || j==7){
-        if (i==0){
+      if (j===0 || j===7){
+        if (i===0){
           newb[i][j] = "bro";
         }
-        else if (i==7){
+        else if (i===7){
           newb[i][j] = "wro";
         }
       }
 
-      if (j==1 || j==6){
-        if (i==0){
+      if (j===1 || j===6){
+        if (i===0){
           newb[i][j] = "bkn";
         }
-        else if (i==7){
+        else if (i===7){
           newb[i][j] = "wkn";
         }
       }
 
-      if (j==2 || j==5){
-        if (i==0){
+      if (j===2 || j===5){
+        if (i===0){
           newb[i][j] = "bbi";
         }
-        else if (i==7){
+        else if (i===7){
           newb[i][j] = "wbi";
         }
       }
 
-      if (j==3){
-        if (i==0){
+      if (j===3){
+        if (i===0){
           newb[i][j] = "bqu";
         }
-        else if (i==7){
+        else if (i===7){
           newb[i][j] = "wqu";
         }
       }
 
-      if (j==4){
-        if (i==0){
+      if (j===4){
+        if (i===0){
           newb[i][j] = "bki";
         }
-        else if (i==7){
+        else if (i===7){
           newb[i][j] = "wki";
         }
       }
@@ -106,7 +106,12 @@ class Board extends React.Component {
   }
 
   pieceClicked(i,j){
+    const changed_board = this.state.board_data.slice();
     console.log(`clicked ${i} ${j}`);
+    changed_board[i][j] = "wkn";
+    this.setState({
+      board_data: changed_board
+    })
   }
 
   renderSquare(i,j){
