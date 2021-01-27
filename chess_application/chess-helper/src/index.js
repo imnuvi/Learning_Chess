@@ -20,7 +20,7 @@ import ReactDOM from 'react-dom';
 class Square extends React.Component {
   render(){
 
-    const piece = (this.props.value != null) ? (<div className={ `piece ${this.props.value}`} onClick={() => {this.props.onClick()}}></div>) : (null);
+    const piece = (this.props.value != null) ? (<div className={ `piece ${this.props.value}`} onClick={() => {this.props.onClick()} }></div>) : (null);
 
     return(
       <div className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
@@ -30,12 +30,33 @@ class Square extends React.Component {
   }
 }
 
+
+
+let fresh_board = new Array(8).fill(null).map(() => new Array(8).fill("bbi"));
+
+function board_reset(board){
+  let newb = new Array(8).fill(null).map(() => new Array(8).fill(null));
+  for (let i=0; i<board.length; i++){
+    for (let j=0; j<board[0].length; j++){
+      if (i==1){
+        newb[i][j] = "bpa";
+      }
+      if (i==6){
+        newb[i][j] = "wpa";
+      }
+    }
+  }
+  return newb
+}
+
+fresh_board = board_reset(fresh_board)
+
 class Board extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
-        board_data : new Array(8).fill(null).map(() => new Array(8).fill("bro"))
+        board_data : fresh_board
     };
   }
 
