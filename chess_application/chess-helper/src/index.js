@@ -44,6 +44,51 @@ function board_reset(board){
       if (i==6){
         newb[i][j] = "wpa";
       }
+      if (j==0 || j==7){
+        if (i==0){
+          newb[i][j] = "bro";
+        }
+        else if (i==7){
+          newb[i][j] = "wro";
+        }
+      }
+
+      if (j==1 || j==6){
+        if (i==0){
+          newb[i][j] = "bkn";
+        }
+        else if (i==7){
+          newb[i][j] = "wkn";
+        }
+      }
+
+      if (j==2 || j==5){
+        if (i==0){
+          newb[i][j] = "bbi";
+        }
+        else if (i==7){
+          newb[i][j] = "wbi";
+        }
+      }
+
+      if (j==3){
+        if (i==0){
+          newb[i][j] = "bqu";
+        }
+        else if (i==7){
+          newb[i][j] = "wqu";
+        }
+      }
+
+      if (j==4){
+        if (i==0){
+          newb[i][j] = "bki";
+        }
+        else if (i==7){
+          newb[i][j] = "wki";
+        }
+      }
+
     }
   }
   return newb
