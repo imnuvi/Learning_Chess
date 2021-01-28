@@ -19,18 +19,20 @@ import ReactDOM from 'react-dom';
 
 class Piece extends React.Component {
   render(){
-    const piece = (this.props.value != null) ? (<div className={ `piece ${this.props.value}`} onClick={() => {this.props.onClick()}}  draggable='true' ></div>) : (null);
-
     return(
-        {piece}
-    );
+      <div className={ `piece ${this.props.value}`} draggable='true' ></div>
+    )
   }
 }
 
 class Square extends React.Component {
   render(){
+
+    const piece = (this.props.value != null) ? (<Piece value={this.props.value}/>) : (null);
+
     return(
       <div className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
+          {piece}
       </div>
     );
   }
@@ -121,11 +123,7 @@ class Board extends React.Component {
   }
 
   renderSquare(i,j){
-    return (
-      <Square  key={i*10 + j} id={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} >
-        <Piece value={this.state.board_data[i][j]} onClick={() => {this.pieceClicked(i,j)}} />
-      </Square>
-    );
+    return <Square  key={i*10 + j} id={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} onClick={() => {this.pieceClicked(i,j)}} />;
   }
 
   renderBoard(){
