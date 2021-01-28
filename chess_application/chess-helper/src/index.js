@@ -19,8 +19,8 @@ import ReactDOM from 'react-dom';
 
 class Piece extends React.Component {
   pieceDragged(){
-    console.log(`clicked ${this.props.value}`);
-    this.props.updateMove()
+    console.log(`dragged ${this.props.value}`);
+    // this.props.updateMove()
   }
 
   pieceClicked(){
@@ -30,7 +30,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div className={ `piece ${this.props.value}` } draggable='true' onClick={() => this.pieceClicked()}>
+      <div className={ `piece ${this.props.value}` } draggable='true' onClick={() => this.pieceClicked()} onDrag={() => {this.pieceDragged()}} >
       </div>
     )
   }
@@ -127,7 +127,7 @@ class Board extends React.Component {
   pieceClicked(i,j){
     const changed_board = this.state.board_data.slice();
     console.log(`clicked ${i} ${j}`);
-    changed_board[i][j] = "wkn";
+    changed_board[i][j] = "wki";
     this.setState({
       board_data: changed_board
     });
