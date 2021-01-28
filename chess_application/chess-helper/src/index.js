@@ -115,7 +115,7 @@ class Board extends React.Component {
   }
 
   renderSquare(i,j){
-    return <Square  key={i*10 + j} id={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} onClick={() => {this.pieceClicked(i,j)}} onDrag={() => this.pieceDragged(i,j)} onDragOver={() => this.Dragged(i,j) }/>;
+    return <Square  key={i*10 + j} id={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} onClick={() => {this.pieceClicked(i,j)}} />;
   }
 
   renderBoard(){
