@@ -20,10 +20,10 @@ import ReactDOM from 'react-dom';
 class Square extends React.Component {
   render(){
 
-    const piece = (this.props.value != null) ? (<div className={ `piece ${this.props.value}`} onClick={() => {this.props.onClick()}} draggable="true" onDrag={this.props.onDrag()} ></div>) : (null);
+    const piece = (this.props.value != null) ? (<div className={ `piece ${this.props.value}`} onClick={() => {this.props.onClick()}} ></div>) : (null);
 
     return(
-      <div className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } onDragOver={() => {this.props.onDragOver()}}>
+      <div className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
           {piece}
       </div>
     );
@@ -105,10 +105,6 @@ class Board extends React.Component {
     };
   }
 
-  Dragged(i,j){
-    console.log("dragged bruv");
-  }
-
   pieceClicked(i,j){
     const changed_board = this.state.board_data.slice();
     console.log(`clicked ${i} ${j}`);
@@ -118,12 +114,8 @@ class Board extends React.Component {
     });
   }
 
-  pieceDragged(i,j){
-    console.log(`dragged the piece ${this.props.board_data}`)
-  }
-
   renderSquare(i,j){
-    return <Square  key={i*10 + j} id={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} onClick={() => this.pieceClicked(i,j)} onDrag={() => this.pieceDragged(i,j)} onDragOver={() => this.Dragged(i,j) }/>;
+    return <Square  key={i*10 + j} id={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} onClick={() => {this.pieceClicked(i,j)}} onDrag={() => this.pieceDragged(i,j)} onDragOver={() => this.Dragged(i,j) }/>;
   }
 
   renderBoard(){
