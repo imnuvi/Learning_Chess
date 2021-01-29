@@ -7,10 +7,13 @@ class Piece extends React.Component {
     super(props);
     this.myRef = React.createRef();
     this.state = {
+      piece_width: 0,
+      piece_height: 0,
       originalX: 0,
       originalY: 0,
       newX: 0,
       newY: 0,
+      changeStyle: ''
     };
   }
 
@@ -25,6 +28,8 @@ class Piece extends React.Component {
       originalY: boundingBox.top,
       newX: boundingBox.left,
       newY: boundingBox.top,
+      piece_width: boundingBox.width,
+      piece_height: boundingBox.height
     });
   }
 
@@ -53,8 +58,17 @@ class Piece extends React.Component {
     this.setState({
       newX: e.pageX,
       newY: e.pageY,
+      changeStyle: `translate(${e.pageX-this.state.originalX-(this.state.piece_width/2)}px, ${e.pageY-this.state.originalY-(this.state.piece_height/2)}px)`
     })
     // this.myRef.style.transform = `translate(${e.pageX-this.state.originalX}px, ${e.pageY-this.state.originalY}px)`;
+  }
+
+  mouseUpper = (e) => {
+    this.setState({
+      newX: this.state.originalX,
+      newY: this.state.originalY,
+      changeStyle: ''
+    })
   }
 
   styler(){
@@ -65,12 +79,14 @@ class Piece extends React.Component {
 
     let differenceX = (newX > originalX)? ((newX-originalX)) : (-(originalX-newX))
 
+    // return `translate(${this.state.newX-this.state.originalX-(this.state.piece_width/2)}px, ${this.state.newY-this.state.originalY-(this.state.piece_height/2)}px)`
+
     return 'red'
   }
 
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} style={{transform: `translate(${this.state.newX-this.state.originalX}px, ${this.state.newY-this.state.originalY}px)`}} onMouseDown={this.mouseDowner} >
+      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} style={{transform: this.state.changeStyle}} onMouseDown={this.mouseDowner} onMouseUp={this.mouseUpper}>
       </div>
     )
   }
