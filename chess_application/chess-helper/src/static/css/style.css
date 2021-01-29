@@ -78,6 +78,10 @@ body {
   cursor: grabbing;
 }
 
+.dragged {
+  cursor: grabbing;
+}
+
 .wbi {
   background-image: url("../chess_icons/32bit/white_bishop.png");
 }

@@ -93,6 +93,7 @@ body {
   background-repeat: no-repeat;
   image-rendering: pixelated;
   background-color: transparent;
+
 }
 
 .piece:hover {
@@ -100,6 +101,10 @@ body {
 }
 
 .piece:active {
+  cursor: grabbing;
+}
+
+.dragged {
   cursor: grabbing;
 }
 

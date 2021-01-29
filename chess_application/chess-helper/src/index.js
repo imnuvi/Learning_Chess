@@ -29,7 +29,8 @@ class Piece extends React.Component {
       newX: boundingBox.left,
       newY: boundingBox.top,
       piece_width: boundingBox.width,
-      piece_height: boundingBox.height
+      piece_height: boundingBox.height,
+      moving: false
     });
   }
 
@@ -58,8 +59,22 @@ class Piece extends React.Component {
     this.setState({
       newX: e.pageX,
       newY: e.pageY,
-      changeStyle: `translate(${e.pageX-this.state.originalX-(this.state.piece_width/2)}px, ${e.pageY-this.state.originalY-(this.state.piece_height/2)}px)`
+      changeStyle: `translate(${e.pageX-this.state.originalX-(this.state.piece_width/2)}px, ${e.pageY-this.state.originalY-(this.state.piece_height/2)}px)`,
+      moving: true
     })
+    // this.myRef.style.transform = `translate(${e.pageX-this.state.originalX}px, ${e.pageY-this.state.originalY}px)`;
+  }
+
+  mouseMover = (e) => {
+    if (this.state.moving === true){
+      this.setState({
+        newX: e.pageX,
+        newY: e.pageY,
+        changeStyle: `translate(${e.pageX-this.state.originalX-(this.state.piece_width/2)}px, ${e.pageY-this.state.originalY-(this.state.piece_height/2)}px)`
+      })
+    }
+
+    // e.dataTransfer.setDragImage(this.myRef.current,this.state.piece_width/2,this.state.piece_height/2)
     // this.myRef.style.transform = `translate(${e.pageX-this.state.originalX}px, ${e.pageY-this.state.originalY}px)`;
   }
 
@@ -67,7 +82,8 @@ class Piece extends React.Component {
     this.setState({
       newX: this.state.originalX,
       newY: this.state.originalY,
-      changeStyle: ''
+      changeStyle: '',
+      moving: false
     })
     // console.log("hmmmm")
   }
@@ -87,7 +103,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} style={{transform: this.state.changeStyle}} onMouseDown={this.mouseDowner} onMouseUp={this.mouseUpper}>
+      <div id={this.props.id} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} onMouseDown={this.mouseDowner} draggable='false' onMouseMove={this.mouseMover} onDragEnd={this.mouseUpper} onMouseUp={this.mouseUpper} >
       </div>
     )
   }
