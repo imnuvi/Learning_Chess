@@ -20,6 +20,7 @@ import ReactDOM from 'react-dom';
 class Piece extends React.Component {
   constructor(props){
     super(props);
+    this.myRef = React.createRef();
     this.state = {
       originalX: 0,
       originalY: 0
@@ -28,13 +29,14 @@ class Piece extends React.Component {
 
   componentDidMount(){
     // console.log(`mounted piece ${this.props.value}`);
-    const bb = document.getElementById(`piece${this.props.id}`);
+    // const bb = document.getElementById(`piece${this.props.id}`);
     // const boundingBox = bb.getBoundingClientRect()
+    const boundingBox = this.myRef.current.getBoundingClientRect()
     this.setState = {
       originalX: 0,
       originalY:0
     };
-    console.log(bb);
+    // console.log(boundingBox);
   }
 
   pieceDragged = (e) => {
@@ -52,7 +54,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}` } draggable='true' onClick={() => this.pieceClicked()} onDrag={this.pieceDragged} >
+      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} draggable='true' onClick={() => this.pieceClicked()} onDrag={this.pieceDragged} >
       </div>
     )
   }
