@@ -8,11 +8,10 @@ class Piece extends React.Component {
     this.myRef = React.createRef();
     this.state = {
       originalX: 0,
-      originalY: 0
+      originalY: 0,
+      differenceX: 0,
+      differenceY: 0,
     };
-    this.TranslateStyle = {
-
-    }
   }
 
   componentDidMount(){
@@ -23,7 +22,7 @@ class Piece extends React.Component {
     // console.log(boundingBox.left,boundingBox.top);
     this.setState({
       originalX: boundingBox.left,
-      originalY: boundingBox.top
+      originalY: boundingBox.top,
     });
   }
 
@@ -32,10 +31,13 @@ class Piece extends React.Component {
     // console.log(this.state.originalX,this.state.originalY);
     // console.log(e.pageX,e.pageY);
     // this.myRef.style
-    this.TranslateStyle = {
-      transform: `translate${e.pageX-this.state.originalX}${e.pageY-this.state.originalY}`
-    }
-
+    // console.log(`translate(${this.state.differenceX-this.state.originalX}px, ${this.state.differenceY-this.state.originalY}px)`);
+     // style={{transform: `translate(${this.state.originalX+this.state.differenceX}px, ${this.state.originalY-this.state.differenceY}px)`}}
+    this.setState({
+      differenceX: e.pageX,
+      differenceY: e.pageY,
+    })
+    // this.myRef.
   }
 
   pieceClicked(){
@@ -43,9 +45,19 @@ class Piece extends React.Component {
     this.props.pieceClicked()
   }
 
+  mouseDowner = (e) => {
+    console.log(`mouse downn ${e.pageX} ${e.pageY}`);
+    console.log(`original ${this.state.originalX} ${this.state.originalY}`);
+    this.setState({
+      differenceX: e.pageX,
+      differenceY: e.pageY,
+    })
+    // this.myRef.style.transform = `translate(${e.pageX-this.state.originalX}px, ${e.pageY-this.state.originalY}px)`;
+  }
+
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} style={this.TranslateStyle} onClick={() => this.pieceClicked()} onDrag={this.pieceDragged} >
+      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} onMouseDown={this.mouseDowner} >
       </div>
     )
   }
