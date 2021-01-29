@@ -9,8 +9,8 @@ class Piece extends React.Component {
     this.state = {
       originalX: 0,
       originalY: 0,
-      differenceX: 0,
-      differenceY: 0,
+      newX: 0,
+      newY: 0,
     };
   }
 
@@ -31,11 +31,11 @@ class Piece extends React.Component {
     // console.log(this.state.originalX,this.state.originalY);
     // console.log(e.pageX,e.pageY);
     // this.myRef.style
-    // console.log(`translate(${this.state.differenceX-this.state.originalX}px, ${this.state.differenceY-this.state.originalY}px)`);
-     // style={{transform: `translate(${this.state.originalX+this.state.differenceX}px, ${this.state.originalY-this.state.differenceY}px)`}}
+    // console.log(`translate(${this.state.newX-this.state.originalX}px, ${this.state.newY-this.state.originalY}px)`);
+     // style={{transform: `translate(${this.state.originalX+this.state.newX}px, ${this.state.originalY-this.state.newY}px)`}}
     this.setState({
-      differenceX: e.pageX,
-      differenceY: e.pageY,
+      newX: e.pageX,
+      newY: e.pageY,
     })
     // this.myRef.
   }
@@ -49,15 +49,26 @@ class Piece extends React.Component {
     console.log(`mouse downn ${e.pageX} ${e.pageY}`);
     console.log(`original ${this.state.originalX} ${this.state.originalY}`);
     this.setState({
-      differenceX: e.pageX,
-      differenceY: e.pageY,
+      newX: e.pageX,
+      newY: e.pageY,
     })
     // this.myRef.style.transform = `translate(${e.pageX-this.state.originalX}px, ${e.pageY-this.state.originalY}px)`;
   }
 
+  styler(){
+    let newX = this.state.newX;
+    let newY = this.state.newY;
+    let originalX = this.state.originalX;
+    let originalX = this.state.originalX;
+
+    let differenceX = (newX > originalX)? ((newX-originalX)) : (-(originalX-newX))
+
+    return 'red'
+  }
+
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} onMouseDown={this.mouseDowner} >
+      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} style={{background: `${this.styler()}`}} onMouseDown={this.mouseDowner} >
       </div>
     )
   }
