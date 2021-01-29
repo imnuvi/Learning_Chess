@@ -17,19 +17,18 @@ class Piece extends React.Component {
     // const bb = document.getElementById(`piece${this.props.id}`);
     // const boundingBox = bb.getBoundingClientRect()
     const boundingBox = this.myRef.current.getBoundingClientRect()
-    this.setState = {
+    // console.log(boundingBox.left,boundingBox.top);
+    this.setState({
       originalX: boundingBox.left,
       originalY: boundingBox.top
-    };
-    // console.log(boundingBox);
+    });
   }
 
   pieceDragged = (e) => {
     // console.log(`dragged ${this.props.value}`);
-    console.log(e);
+    // console.log(this.state.originalX,this.state.originalY);
+    console.log(e.pageX,e.pageY);
 
-
-    // this.props.updateMove()
   }
 
   pieceClicked(){
