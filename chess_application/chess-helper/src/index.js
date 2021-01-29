@@ -20,16 +20,27 @@ import ReactDOM from 'react-dom';
 class Piece extends React.Component {
   constructor(props){
     super(props);
-    ID = this.props.id;
-    boundBox = 
     this.state = {
-      originalX:
-      originalY:
-    }
+      originalX: 0,
+      originalY: 0
+    };
   }
+
+  componentDidMount(){
+    // console.log(`mounted piece ${this.props.value}`);
+    const bb = document.getElementById(`piece${this.props.id}`);
+    // const boundingBox = bb.getBoundingClientRect()
+    this.setState = {
+      originalX: 0,
+      originalY:0
+    };
+    console.log(bb);
+  }
+
   pieceDragged = (e) => {
-    console.log(`dragged ${this.props.value}`);
+    // console.log(`dragged ${this.props.value}`);
     console.log(e);
+
 
     // this.props.updateMove()
   }
@@ -41,7 +52,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div className={ `piece ${this.props.value}` } draggable='true' onClick={() => this.pieceClicked()} onDrag={this.pieceDragged} >
+      <div id={this.props.id} className={ `piece ${this.props.value}` } draggable='true' onClick={() => this.pieceClicked()} onDrag={this.pieceDragged} >
       </div>
     )
   }
@@ -153,9 +164,9 @@ class Board extends React.Component {
   }
 
   renderSquare(i,j){
-    const piece = (this.state.board_data[i][j] != null) ? (<Piece value={this.state.board_data[i][j]}  updateMove={() => {this.updateMove(i,j)}} pieceClicked={() => {this.pieceClicked(i,j)}}/>) : (null);
+    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} value={this.state.board_data[i][j]}  updateMove={() => {this.updateMove(i,j)}} pieceClicked={() => {this.pieceClicked(i,j)}}/>) : (null);
     return(
-      <Square  id={`${i*10 + j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} >
+      <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} >
           {piece}
       </Square>
 
