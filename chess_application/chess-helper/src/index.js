@@ -2,30 +2,75 @@ import './static/css/style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// import white_bishop from './chess_icons/white_bishop.png';
-// import white_knight from './chess_icons/white_knight.png';
-// import white_rookh from './chess_icons/white_rookh.png';
-// import white_king from './chess_icons/white_king.png';
-// import white_queen from './chess_icons/white_queen.png';
-// import white_pawn from './chess_icons/white_pawn.png';
-//
-// import black_bishop from './chess_icons/black_bishop.png';
-// import black_knight from './chess_icons/black_knight.png';
-// import black_rookh from './chess_icons/black_rookh.png';
-// import black_king from './chess_icons/black_king.png';
-// import black_queen from './chess_icons/black_queen.png';
-// import black_pawn from './chess_icons/black_pawn.png';
-
-
 class Piece extends React.Component {
-  PieceDragged(){
+  constructor(props){
+    super(props);
+    this.myRef = React.createRef();
+    this.state = {
+      originalX: 0,
+      originalY: 0,
+      newX: 0,
+      newY: 0,
+    };
+  }
+
+  componentDidMount(){
+    // console.log(`mounted piece ${this.props.value}`);
+    // const bb = document.getElementById(`piece${this.props.id}`);
+    // const boundingBox = bb.getBoundingClientRect()
+    const boundingBox = this.myRef.current.getBoundingClientRect()
+    // console.log(boundingBox.left,boundingBox.top);
+    this.setState({
+      originalX: boundingBox.left,
+      originalY: boundingBox.top,
+      newX: boundingBox.left,
+      newY: boundingBox.top,
+    });
+  }
+
+  pieceDragged = (e) => {
+    // console.log(`dragged ${this.props.value}`);
+    // console.log(this.state.originalX,this.state.originalY);
+    // console.log(e.pageX,e.pageY);
+    // this.myRef.style
+    // console.log(`translate(${this.state.newX-this.state.originalX}px, ${this.state.newY-this.state.originalY}px)`);
+     // style={{transform: `translate(${this.state.originalX+this.state.newX}px, ${this.state.originalY-this.state.newY}px)`}}
+    this.setState({
+      newX: e.pageX,
+      newY: e.pageY,
+    })
+    // this.myRef.
+  }
+
+  pieceClicked(){
     console.log(`clicked ${this.props.value}`);
-    this.props.updateMove()
+    this.props.pieceClicked()
+  }
+
+  mouseDowner = (e) => {
+    console.log(`mouse downn ${e.pageX} ${e.pageY}`);
+    console.log(`original ${this.state.originalX} ${this.state.originalY}`);
+    this.setState({
+      newX: e.pageX,
+      newY: e.pageY,
+    })
+    // this.myRef.style.transform = `translate(${e.pageX-this.state.originalX}px, ${e.pageY-this.state.originalY}px)`;
+  }
+
+  styler(){
+    let newX = this.state.newX;
+    let newY = this.state.newY;
+    let originalX = this.state.originalX;
+    let originalY = this.state.originalY;
+
+    let differenceX = (newX > originalX)? ((newX-originalX)) : (-(originalX-newX))
+
+    return 'red'
   }
 
   render(){
     return(
-      <div className={ `piece ${this.props.value}`} draggable='true' onClick={() => this.PieceDragged()}>
+      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} style={{transform: `translate(${this.state.newX-this.state.originalX}px, ${this.state.newY-this.state.originalY}px)`}} onMouseDown={this.mouseDowner} >
       </div>
     )
   }
@@ -34,10 +79,8 @@ class Piece extends React.Component {
 class Square extends React.Component {
   render(){
 
-
-
     return(
-      <div className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
+      <div id={this.props.id} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
         {this.props.children}
       </div>
     );
@@ -122,7 +165,7 @@ class Board extends React.Component {
   pieceClicked(i,j){
     const changed_board = this.state.board_data.slice();
     console.log(`clicked ${i} ${j}`);
-    changed_board[i][j] = "wkn";
+    changed_board[i][j] = "wki";
     this.setState({
       board_data: changed_board
     });
@@ -139,9 +182,9 @@ class Board extends React.Component {
   }
 
   renderSquare(i,j){
-    const piece = (this.state.board_data[i][j] != null) ? (<Piece value={this.state.board_data[i][j]}  updateMove={() => {this.updateMove(i,j)}} />) : (null);
+    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} value={this.state.board_data[i][j]}  updateMove={() => {this.updateMove(i,j)}} pieceClicked={() => {this.pieceClicked(i,j)}}/>) : (null);
     return(
-      <Square  key={i*10 + j} id={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} >
+      <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} >
           {piece}
       </Square>
 
