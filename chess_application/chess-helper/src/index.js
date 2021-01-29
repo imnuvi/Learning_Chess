@@ -23,6 +23,8 @@ class Piece extends React.Component {
     this.setState({
       originalX: boundingBox.left,
       originalY: boundingBox.top,
+      newX: boundingBox.left,
+      newY: boundingBox.top,
     });
   }
 
@@ -59,7 +61,7 @@ class Piece extends React.Component {
     let newX = this.state.newX;
     let newY = this.state.newY;
     let originalX = this.state.originalX;
-    let originalX = this.state.originalX;
+    let originalY = this.state.originalY;
 
     let differenceX = (newX > originalX)? ((newX-originalX)) : (-(originalX-newX))
 
@@ -68,7 +70,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} style={{background: `${this.styler()}`}} onMouseDown={this.mouseDowner} >
+      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} style={{transform: `translate(${this.state.newX-this.state.originalX}px, ${this.state.newY-this.state.originalY}px)`}} onMouseDown={this.mouseDowner} >
       </div>
     )
   }
