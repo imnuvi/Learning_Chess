@@ -10,6 +10,9 @@ class Piece extends React.Component {
       originalX: 0,
       originalY: 0
     };
+    this.TranslateStyle = {
+
+    }
   }
 
   componentDidMount(){
@@ -27,7 +30,11 @@ class Piece extends React.Component {
   pieceDragged = (e) => {
     // console.log(`dragged ${this.props.value}`);
     // console.log(this.state.originalX,this.state.originalY);
-    console.log(e.pageX,e.pageY);
+    // console.log(e.pageX,e.pageY);
+    // this.myRef.style
+    this.TranslateStyle = {
+      transform: `translate${e.pageX-this.state.originalX}${e.pageY-this.state.originalY}`
+    }
 
   }
 
@@ -38,7 +45,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} draggable='true' onClick={() => this.pieceClicked()} onDrag={this.pieceDragged} >
+      <div id={this.props.id} className={ `piece ${this.props.value}` } ref={this.myRef} style={this.TranslateStyle} onClick={() => this.pieceClicked()} onDrag={this.pieceDragged} >
       </div>
     )
   }
