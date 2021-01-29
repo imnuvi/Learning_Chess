@@ -2,21 +2,6 @@ import './static/css/style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// import white_bishop from './chess_icons/white_bishop.png';
-// import white_knight from './chess_icons/white_knight.png';
-// import white_rookh from './chess_icons/white_rookh.png';
-// import white_king from './chess_icons/white_king.png';
-// import white_queen from './chess_icons/white_queen.png';
-// import white_pawn from './chess_icons/white_pawn.png';
-//
-// import black_bishop from './chess_icons/black_bishop.png';
-// import black_knight from './chess_icons/black_knight.png';
-// import black_rookh from './chess_icons/black_rookh.png';
-// import black_king from './chess_icons/black_king.png';
-// import black_queen from './chess_icons/black_queen.png';
-// import black_pawn from './chess_icons/black_pawn.png';
-
-
 class Piece extends React.Component {
   constructor(props){
     super(props);
@@ -33,8 +18,8 @@ class Piece extends React.Component {
     // const boundingBox = bb.getBoundingClientRect()
     const boundingBox = this.myRef.current.getBoundingClientRect()
     this.setState = {
-      originalX: 0,
-      originalY:0
+      originalX: boundingBox.left,
+      originalY: boundingBox.top
     };
     // console.log(boundingBox);
   }
