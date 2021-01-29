@@ -69,6 +69,7 @@ class Piece extends React.Component {
       newY: this.state.originalY,
       changeStyle: ''
     })
+    // console.log("hmmmm")
   }
 
   styler(){
