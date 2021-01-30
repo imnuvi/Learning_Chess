@@ -96,7 +96,7 @@ body {
   image-rendering: pixelated;
   background-color: transparent;
 
-  z-index: 500;
+  z-index: 1;
 
 }
 
@@ -110,7 +110,6 @@ body {
 
 .dragged {
   cursor: grabbing;
-  user-drag: none;
 }
 
 // piece specifications
