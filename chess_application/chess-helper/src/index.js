@@ -18,11 +18,8 @@ class Piece extends React.Component {
   }
 
   componentDidMount(){
-    // console.log(`mounted piece ${this.props.value}`);
-    // const bb = document.getElementById(`piece${this.props.id}`);
-    // const boundingBox = bb.getBoundingClientRect()
     const boundingBox = this.myRef.current.getBoundingClientRect()
-    // console.log(boundingBox.left,boundingBox.top);
+
     this.setState({
       originalX: boundingBox.left,
       originalY: boundingBox.top,
@@ -35,17 +32,10 @@ class Piece extends React.Component {
   }
 
   pieceDragged = (e) => {
-    // console.log(`dragged ${this.props.value}`);
-    // console.log(this.state.originalX,this.state.originalY);
-    // console.log(e.pageX,e.pageY);
-    // this.myRef.style
-    // console.log(`translate(${this.state.newX-this.state.originalX}px, ${this.state.newY-this.state.originalY}px)`);
-     // style={{transform: `translate(${this.state.originalX+this.state.newX}px, ${this.state.originalY-this.state.newY}px)`}}
-    this.setState({
+      this.setState({
       newX: e.pageX,
       newY: e.pageY,
     })
-    // this.myRef.
   }
 
   pieceClicked(){
@@ -74,8 +64,6 @@ class Piece extends React.Component {
       })
     }
 
-    // e.dataTransfer.setDragImage(this.myRef.current,this.state.piece_width/2,this.state.piece_height/2)
-    // this.myRef.style.transform = `translate(${e.pageX-this.state.originalX}px, ${e.pageY-this.state.originalY}px)`;
   }
 
   mouseUpper = (e) => {
@@ -85,7 +73,6 @@ class Piece extends React.Component {
       changeStyle: '',
       moving: false
     })
-    // console.log("hmmmm")
   }
 
   styler(){
@@ -96,9 +83,7 @@ class Piece extends React.Component {
 
     let differenceX = (newX > originalX)? ((newX-originalX)) : (-(originalX-newX))
 
-    // return `translate(${this.state.newX-this.state.originalX-(this.state.piece_width/2)}px, ${this.state.newY-this.state.originalY-(this.state.piece_height/2)}px)`
-
-    return 'red'
+    // return 'red'
   }
 
   render(){
