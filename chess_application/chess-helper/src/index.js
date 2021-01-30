@@ -103,7 +103,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} onMouseDown={this.mouseDowner} draggable='false' onMouseMove={this.mouseMover} onDragEnd={this.mouseUpper} onMouseUp={this.mouseUpper} >
+      <div id={this.props.id} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} onMouseDown={this.mouseDowner} draggable='true' onDrag={this.mouseMover} onDragEnd={this.mouseUpper} onMouseUp={this.mouseUpper} >
       </div>
     )
   }
