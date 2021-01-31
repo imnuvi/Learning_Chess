@@ -76,6 +76,7 @@ class Piece extends React.Component {
   }
 
   handleDrag = (e) => {
+    e.preventDefault()
     if (this.state.moving === true){
       this.setState({
         newX: e.pageX,
@@ -209,7 +210,7 @@ class Board extends React.Component {
   }
 
   handleDrop = (e) => {
-    console.log(e);
+    console.log(e.dataTransfer.getData("text/plain"));
     e.preventDefault()
   }
 
