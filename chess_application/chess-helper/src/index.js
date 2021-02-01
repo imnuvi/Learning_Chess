@@ -207,6 +207,7 @@ class Board extends React.Component {
   }
 
   handleDragOver = (e) => {
+
     e.preventDefault();
   }
 
@@ -216,18 +217,6 @@ class Board extends React.Component {
     console.log(e);
     // this.state.board_data
     e.preventDefault()
-  }
-
-  renderRow(i,row){
-    const elems = []
-    for (let j=0; j<row.length; j++ ){
-      elems.push(this.renderSquare(i,j));
-    }
-    return(
-      <div className="board-row" key={i} row={i}>
-        {elems}
-      </div>
-    )
   }
 
   renderSquare(i,j){
@@ -242,31 +231,19 @@ class Board extends React.Component {
 
   renderBoard(){
     let dupe_data = this.state.board_data.slice();
-    // return (
-    //   <div className="Board">
-    //     {dupe_data.map((row,i) => {
-    //         return (
-    //           <div className="board-row" key={i} row={i}>
-    //             {row.map((block,j) => {
-    //               return this.renderSquare(i,j);
-    //             })}
-    //           </div>
-    //         );
-    //     })}
-    //   </div>
-    // );
-
-
-    const rows = [];
-    for (let i=0; i<dupe_data.length; i++){
-      rows.push(this.renderRow(i,this.state.board_data[i]));
-    }
-
-    return(
+    return (
       <div className="Board">
-        {rows}
+        {dupe_data.map((row,i) => {
+            return (
+              <div className="board-row" key={i} row={i}>
+                {row.map((block,j) => {
+                  return this.renderSquare(i,j);
+                })}
+              </div>
+            );
+        })}
       </div>
-    )
+    );
   }
 
   render(){
