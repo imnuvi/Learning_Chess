@@ -88,7 +88,9 @@ class Piece extends React.Component {
   }
 
   handleDragStart = (e) => {
-    e.dataTransfer.setData("text/plain","hello im the dragged message");
+    // e.dataTransfer.setData("text/plain",["hello im the dragged message","this is another", "and another"]);
+    e.dataTransfer.setData("piece_type",`${this.props.value}`);
+    // e.dataTransfer.setData("piece_type",`${this.props.value}`);
   }
 
   render(){
@@ -205,12 +207,13 @@ class Board extends React.Component {
 
   handleDragOver = (e) => {
 
-    e.preventDefault()
-    console.log(e);
+    e.preventDefault();
   }
 
   handleDrop = (e) => {
-    console.log(e.dataTransfer.getData("text/plain"));
+    console.log(e.dataTransfer.getData("piece_type"));
+    console.log(e.dataTransfer.items);
+    console.log(e);
     e.preventDefault()
   }
 
