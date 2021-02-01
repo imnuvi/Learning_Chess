@@ -1,6 +1,7 @@
 
 // variables
 $piece_style : '32bit';
+$board : 'chess_board';
 $wbi: 'white_bishop';
 $wro: 'white_rookh';
 $wkn: 'white_knight';
@@ -53,6 +54,11 @@ body {
   width: fit-content;
   margin: auto;
   margin-top: 50px;
+
+  background-image: url('../chess_icons/board_images/#{$board}.png');
+  image-rendering: pixelated;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .board-row {
@@ -68,6 +74,7 @@ body {
   height: 100px;
   border: 1px solid #999;
   float: left;
+  user-drag: none;
 }
 
 .square > img {
@@ -77,13 +84,13 @@ body {
   z-index: -10;
 }
 
-.black-square {
-  background: #0f6e91;
-}
-
-.white-square {
-  background: #feffd6;
-}
+// .black-square {
+//   background: #0f6e91;
+// }
+//
+// .white-square {
+//   background: #feffd6;
+// }
 
 // pieces styling
 .piece {
@@ -108,10 +115,7 @@ body {
   cursor: grabbing;
 }
 
-.dragged {
-  cursor: grabbing;
-  background: none;
-}
+
 
 // piece specifications
 
@@ -163,4 +167,8 @@ body {
 
 .bpa {
   background-image: url('../chess_icons/#{$piece_style}/#{$bpa}.png');
+}
+
+.dragged {
+  transform: rotate(20deg);
 }
