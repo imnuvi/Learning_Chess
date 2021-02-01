@@ -13,16 +13,14 @@ class Piece extends React.Component {
       originalY: 0,
       newX: 0,
       newY: 0,
+      moving: false,
       changeStyle: ''
     };
   }
 
   componentDidMount(){
-    // console.log(`mounted piece ${this.props.value}`);
-    // const bb = document.getElementById(`piece${this.props.id}`);
-    // const boundingBox = bb.getBoundingClientRect()
     const boundingBox = this.myRef.current.getBoundingClientRect()
-    // console.log(boundingBox.left,boundingBox.top);
+
     this.setState({
       originalX: boundingBox.left,
       originalY: boundingBox.top,
@@ -35,17 +33,10 @@ class Piece extends React.Component {
   }
 
   pieceDragged = (e) => {
-    // console.log(`dragged ${this.props.value}`);
-    // console.log(this.state.originalX,this.state.originalY);
-    // console.log(e.pageX,e.pageY);
-    // this.myRef.style
-    // console.log(`translate(${this.state.newX-this.state.originalX}px, ${this.state.newY-this.state.originalY}px)`);
-     // style={{transform: `translate(${this.state.originalX+this.state.newX}px, ${this.state.originalY-this.state.newY}px)`}}
-    this.setState({
+      this.setState({
       newX: e.pageX,
       newY: e.pageY,
     })
-    // this.myRef.
   }
 
   pieceClicked(){
@@ -54,8 +45,8 @@ class Piece extends React.Component {
   }
 
   mouseDowner = (e) => {
-    console.log(`mouse downn ${e.pageX} ${e.pageY}`);
-    console.log(`original ${this.state.originalX} ${this.state.originalY}`);
+    // console.log(`mouse downn ${e.pageX} ${e.pageY}`);
+    // console.log(`original ${this.state.originalX} ${this.state.originalY}`);
     this.setState({
       newX: e.pageX,
       newY: e.pageY,
@@ -74,8 +65,6 @@ class Piece extends React.Component {
       })
     }
 
-    // e.dataTransfer.setDragImage(this.myRef.current,this.state.piece_width/2,this.state.piece_height/2)
-    // this.myRef.style.transform = `translate(${e.pageX-this.state.originalX}px, ${e.pageY-this.state.originalY}px)`;
   }
 
   mouseUpper = (e) => {
@@ -85,25 +74,29 @@ class Piece extends React.Component {
       changeStyle: '',
       moving: false
     })
-    // console.log("hmmmm")
   }
 
-  styler(){
-    let newX = this.state.newX;
-    let newY = this.state.newY;
-    let originalX = this.state.originalX;
-    let originalY = this.state.originalY;
+  handleDrag = (e) => {
+    e.preventDefault()
+    if (this.state.moving === true){
+      this.setState({
+        newX: e.pageX,
+        newY: e.pageY,
+        changeStyle: `translate(${e.pageX-this.state.originalX-(this.state.piece_width/2)}px, ${e.pageY-this.state.originalY-(this.state.piece_height/2)}px)`
+      })
+    }
 
-    let differenceX = (newX > originalX)? ((newX-originalX)) : (-(originalX-newX))
+  }
 
-    // return `translate(${this.state.newX-this.state.originalX-(this.state.piece_width/2)}px, ${this.state.newY-this.state.originalY-(this.state.piece_height/2)}px)`
-
-    return 'red'
+  handleDragStart = (e) => {
+    // e.dataTransfer.setData("text/plain",["hello im the dragged message","this is another", "and another"]);
+    e.dataTransfer.setData("piece_type",`${this.props.value}`);
+    // e.dataTransfer.setData("piece_type",`${this.props.value}`);
   }
 
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} onMouseDown={this.mouseDowner} draggable='true' onDrag={this.mouseMover} onDragEnd={this.mouseUpper} onMouseUp={this.mouseUpper} >
+      <div id={this.props.id} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} draggable='true' >
       </div>
     )
   }
@@ -111,9 +104,8 @@ class Piece extends React.Component {
 
 class Square extends React.Component {
   render(){
-
     return(
-      <div id={this.props.id} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } >
+      <div id={this.props.id} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }  onDragOver={this.props.onDragOver}>
         {this.props.children}
       </div>
     );
@@ -184,7 +176,7 @@ function board_reset(board){
   return newb
 }
 
-fresh_board = board_reset(fresh_board)
+fresh_board = board_reset(fresh_board);
 
 class Board extends React.Component {
 
@@ -214,10 +206,23 @@ class Board extends React.Component {
 
   }
 
+  handleDragOver = (e) => {
+
+    e.preventDefault();
+  }
+
+  handleDrop = (e) => {
+    console.log(e.dataTransfer.getData("piece_type"));
+    console.log(e.dataTransfer.items);
+    console.log(e);
+    // this.state.board_data
+    e.preventDefault()
+  }
+
   renderSquare(i,j){
-    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} value={this.state.board_data[i][j]}  updateMove={() => {this.updateMove(i,j)}} pieceClicked={() => {this.pieceClicked(i,j)}}/>) : (null);
+    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} value={this.state.board_data[i][j]}  pieceClicked={() => {this.pieceClicked(i,j)}}/>) : (null);
     return(
-      <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} >
+      <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}} onDrop={this.handleDrop} onDragOver={this.handleDragOver}>
           {piece}
       </Square>
 
