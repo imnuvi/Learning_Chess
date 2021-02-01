@@ -219,6 +219,18 @@ class Board extends React.Component {
     e.preventDefault()
   }
 
+  renderRow(i,row){
+    const elems = []
+    for (let j=0; j<row.length; j++ ){
+      elems.push(this.renderSquare(i,j));
+    }
+    return(
+      <div className="board-row" key={i} row={i}>
+        {elems}
+      </div>
+    )
+  }
+
   renderSquare(i,j){
     const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} value={this.state.board_data[i][j]}  pieceClicked={() => {this.pieceClicked(i,j)}}  onDrop={this.handleDrop}/>) : (null);
     return(
@@ -244,19 +256,18 @@ class Board extends React.Component {
     //     })}
     //   </div>
     // );
-    return (
+
+
+    const rows = [];
+    for (let i=0; i<dupe_data.length; i++){
+      rows.push(this.renderRow(i,this.state.board_data[i]));
+    }
+
+    return(
       <div className="Board">
-        {dupe_data.map((row,i) => {
-            return (
-              <div className="board-row" key={i} row={i}>
-                {row.map((block,j) => {
-                  return this.renderSquare(i,j);
-                })}
-              </div>
-            );
-        })}
+        {rows}
       </div>
-    );
+    )
   }
 
   render(){
