@@ -231,6 +231,19 @@ class Board extends React.Component {
 
   renderBoard(){
     let dupe_data = this.state.board_data.slice();
+    // return (
+    //   <div className="Board">
+    //     {dupe_data.map((row,i) => {
+    //         return (
+    //           <div className="board-row" key={i} row={i}>
+    //             {row.map((block,j) => {
+    //               return this.renderSquare(i,j);
+    //             })}
+    //           </div>
+    //         );
+    //     })}
+    //   </div>
+    // );
     return (
       <div className="Board">
         {dupe_data.map((row,i) => {
