@@ -106,6 +106,7 @@ class Square extends React.Component {
   render(){
     return(
       <div id={this.props.id} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }  onDragOver={this.props.onDragOver}>
+        {this.props.children}
       </div>
     );
   }
@@ -241,7 +242,6 @@ class Board extends React.Component {
               </div>
             );
         })}
-        <pieces />
       </div>
     );
   }
