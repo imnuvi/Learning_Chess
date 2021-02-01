@@ -207,7 +207,6 @@ class Board extends React.Component {
   }
 
   handleDragOver = (e) => {
-
     e.preventDefault();
   }
 
