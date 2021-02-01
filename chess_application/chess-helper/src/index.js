@@ -177,10 +177,6 @@ function board_reset(board){
 
 fresh_board = board_reset(fresh_board);
 
-class Pieces extends React.Component {
-
-}
-
 class Board extends React.Component {
 
   constructor(props){

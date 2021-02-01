@@ -54,6 +54,11 @@ body {
   width: fit-content;
   margin: auto;
   margin-top: 50px;
+
+  background-image: url('../chess_icons/board_images/#{$board}.png');
+  image-rendering: pixelated;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .board-row {
@@ -79,13 +84,13 @@ body {
   z-index: -10;
 }
 
-.black-square {
-  background: #0f6e91;
-}
-
-.white-square {
-  background: #feffd6;
-}
+// .black-square {
+//   background: #0f6e91;
+// }
+//
+// .white-square {
+//   background: #feffd6;
+// }
 
 // pieces styling
 .piece {
