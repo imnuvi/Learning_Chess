@@ -13,6 +13,7 @@ class Piece extends React.Component {
       originalY: 0,
       newX: 0,
       newY: 0,
+      moving: false,
       changeStyle: ''
     };
   }
@@ -95,7 +96,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} onMouseDown={this.mouseDowner} onMouseUp={this.mouseUpper} draggable='true' onDrag={this.handleDrag} onDragStart={this.handleDragStart}>
+      <div id={this.props.id} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} onMouseDown={this.mouseDowner} onMouseUp={this.mouseUpper} draggable='true' onDrag={this.handleDrag} onDragStart={this.handleDragStart} onDrop={this.props.onDrop}>
       </div>
     )
   }
@@ -104,7 +105,7 @@ class Piece extends React.Component {
 class Square extends React.Component {
   render(){
     return(
-      <div id={this.props.id} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` } onDrop={this.props.onDrop} onDragOver={this.props.onDragOver}>
+      <div id={this.props.id} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }  onDragOver={this.props.onDragOver}>
         {this.props.children}
       </div>
     );
@@ -214,13 +215,14 @@ class Board extends React.Component {
     console.log(e.dataTransfer.getData("piece_type"));
     console.log(e.dataTransfer.items);
     console.log(e);
+    // this.state.board_data
     e.preventDefault()
   }
 
   renderSquare(i,j){
-    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} value={this.state.board_data[i][j]}  pieceClicked={() => {this.pieceClicked(i,j)}}/>) : (null);
+    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} value={this.state.board_data[i][j]}  pieceClicked={() => {this.pieceClicked(i,j)}}  onDrop={this.handleDrop}/>) : (null);
     return(
-      <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}} onDrop={this.handleDrop} onDragOver={this.handleDragOver}>
+      <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}} onDragOver={this.handleDragOver}>
           {piece}
       </Square>
 
