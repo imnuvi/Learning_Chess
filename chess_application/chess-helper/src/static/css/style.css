@@ -45,6 +45,7 @@ body {
   height: 100px;
   border: 1px solid #999;
   float: left;
+  user-drag: none;
 }
 
 .square > img {
@@ -78,10 +79,6 @@ body {
 }
 
 .piece:active {
-  cursor: grabbing;
-}
-
-.dragged {
   cursor: grabbing;
 }
 
@@ -131,6 +128,10 @@ body {
 
 .bpa {
   background-image: url("../chess_icons/32bit/black_pawn.png");
+}
+
+.dragged {
+  transform: rotate(20deg);
 }
 
 /*# sourceMappingURL=style.css.map */

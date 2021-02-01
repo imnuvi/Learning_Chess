@@ -96,7 +96,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} onMouseDown={this.mouseDowner} onMouseUp={this.mouseUpper} draggable='true' onDrag={this.handleDrag} onDragStart={this.handleDragStart} onDrop={this.props.onDrop}>
+      <div id={this.props.id} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} draggable='true' >
       </div>
     )
   }
@@ -106,7 +106,6 @@ class Square extends React.Component {
   render(){
     return(
       <div id={this.props.id} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }  onDragOver={this.props.onDragOver}>
-        {this.props.children}
       </div>
     );
   }
@@ -176,7 +175,11 @@ function board_reset(board){
   return newb
 }
 
-fresh_board = board_reset(fresh_board)
+fresh_board = board_reset(fresh_board);
+
+class Pieces extends React.Component {
+
+}
 
 class Board extends React.Component {
 
@@ -220,9 +223,9 @@ class Board extends React.Component {
   }
 
   renderSquare(i,j){
-    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} value={this.state.board_data[i][j]}  pieceClicked={() => {this.pieceClicked(i,j)}}  onDrop={this.handleDrop}/>) : (null);
+    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} value={this.state.board_data[i][j]}  pieceClicked={() => {this.pieceClicked(i,j)}}/>) : (null);
     return(
-      <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}} onDragOver={this.handleDragOver}>
+      <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}} onDrop={this.handleDrop} onDragOver={this.handleDragOver}>
           {piece}
       </Square>
 
@@ -242,6 +245,7 @@ class Board extends React.Component {
               </div>
             );
         })}
+        <pieces />
       </div>
     );
   }
