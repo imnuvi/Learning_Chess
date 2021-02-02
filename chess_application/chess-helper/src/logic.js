@@ -69,7 +69,6 @@ function pawnMoves(position,piece,board){
 
 function rookhMoves(position,piece,board){
   let rookh_list = [];
-  let newx, newy;
   let oldx = position[0];
   let oldy = position[1];
 
@@ -140,25 +139,67 @@ function rookhMoves(position,piece,board){
 
 function bishopMoves(position,piece,board){
   let bishop_list = [];
-  let newx, newy;
   let oldx = position[0];
   let oldy = position[1];
 
-  let tl_branch = true;
-  let tr_branch = true;
-  let bl_branch = true;
   let br_branch = true;
+  let tr_branch = true;
+  let tl_branch = true;
+  let bl_branch = true;
   let friend = piece.charAt(0);
   let enemy = (friend === 'b') ? 'w' : 'b';
 
   for (let i=1; i<=7; i++){
-
+    if (oldx+i <= 7 && oldy+i <= 7 && br_branch){
+      if (board[oldx+i][oldy+i] === null){
+        bishop_list.push([oldx+i,oldy+i]);
+      }
+      else if (board[oldx+i][oldy+i].charAt(0) === enemy){
+        bishop_list.push([oldx+i,oldy+i]);
+        br_branch = false;
+      }
+      else if (board[oldx+i][oldy+i].charAt(0) === friend){
+        br_branch = false;
+      }
+    }
+    if (oldx-i >= 0 && oldy+i <= 7 && tr_branch){
+      if (board[oldx-i][oldy+i] === null){
+        bishop_list.push([oldx-i,oldy+i]);
+      }
+      else if (board[oldx-i][oldy+i].charAt(0) === enemy){
+        bishop_list.push([oldx-i,oldy+i]);
+        tr_branch = false;
+      }
+      else if (board[oldx-i][oldy+i].charAt(0) === friend){
+        tr_branch = false;
+      }
+    }
+    if (oldx+i <= 7 && oldy-i >= 0 && bl_branch){
+      if (board[oldx+i][oldy-i] === null){
+        bishop_list.push([oldx+i,oldy-i]);
+      }
+      else if (board[oldx+i][oldy-i].charAt(0) === enemy){
+        bishop_list.push([oldx+i,oldy-i]);
+        bl_branch = false;
+      }
+      else if (board[oldx+i][oldy-i].charAt(0) === friend){
+        bl_branch = false;
+      }
+    }
+    if (oldx-i >= 0 && oldy-i >= 0 && tl_branch){
+      if (board[oldx-i][oldy-i] === null){
+        bishop_list.push([oldx-i,oldy-i]);
+      }
+      else if (board[oldx-i][oldy-i].charAt(0) === enemy){
+        bishop_list.push([oldx-i,oldy-i]);
+        tl_branch = false;
+      }
+      else if (board[oldx-i][oldy-i].charAt(0) === friend){
+        tl_branch = false;
+      }
+    }
   }
-
-
-
-
-
+  return (bishop_list);
 }
 
 // function validMoves(possible_moves,position){
@@ -191,6 +232,9 @@ function move(start,end,piece,board){
   }
   if (piece === 'wro' || piece === 'bro'){
     console.log(rookhMoves(start,piece,board));
+  }
+  if (piece === 'wbi' || piece === 'bbi'){
+    console.log(bishopMoves(start,piece,board));
   }
 
   // let startx,starty;
