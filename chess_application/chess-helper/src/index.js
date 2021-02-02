@@ -91,12 +91,14 @@ class Piece extends React.Component {
   handleDragStart = (e) => {
     // e.dataTransfer.setData("text/plain",["hello im the dragged message","this is another", "and another"]);
     e.dataTransfer.setData("piece_type",`${this.props.value}`);
+    e.dataTransfer.setData("piece_row",`${this.props.row}`);
+    e.dataTransfer.setData("piece_column",`${this.props.column}`);
     // e.dataTransfer.setData("piece_type",`${this.props.value}`);
   }
 
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} draggable='true' onDragStart={this.handleDragStart} onDrop={this.props.onDrop}>
+      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} draggable='true' onDragStart={this.handleDragStart} onDrop={this.props.onDrop}>
       </div>
     )
   }
@@ -105,7 +107,7 @@ class Piece extends React.Component {
 class Square extends React.Component {
   render(){
     return(
-      <div id={this.props.id} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }  onDragOver={this.props.onDragOver}>
+      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }  onDragOver={this.props.onDragOver} onDrop={this.props.onDrop}>
         {this.props.children}
       </div>
     );
@@ -213,8 +215,21 @@ class Board extends React.Component {
 
   handleDrop = (e) => {
     console.log(e.dataTransfer.getData("piece_type"));
-    console.log(e.dataTransfer.items);
-    console.log(e);
+    console.log(e.dataTransfer.getData("piece_row"));
+    console.log(e.dataTransfer.getData("piece_column"));
+    console.log(e.target.attributes.getNamedItem('row').value);
+
+    let piece_type = e.dataTransfer.getData("piece_type");
+    let start_row = parseInt(e.dataTransfer.getData("piece_row"));
+    let start_column = parseInt(e.dataTransfer.getData("piece_column"));
+    const changed_board = this.state.board_data.slice();
+    changed_board[start_row][start_column] = piece_type;
+
+    this.setState({
+      board_data: changed_board
+    });
+
+    console.log(start_row,start_column);
     // this.state.board_data
     e.preventDefault()
   }
