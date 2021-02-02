@@ -1,6 +1,7 @@
 import './static/css/style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import { hello } from "./logic.js";
 
 class Piece extends React.Component {
   constructor(props){
@@ -93,7 +94,7 @@ class Piece extends React.Component {
     e.dataTransfer.setData("piece_type",`${this.props.value}`);
     e.dataTransfer.setData("piece_row",`${this.props.row}`);
     e.dataTransfer.setData("piece_column",`${this.props.column}`);
-    e.dataTransfer.effectAllowed = 'linkAA';
+    e.dataTransfer.effectAllowed = 'link';
     // e.dataTransfer.setData("piece_type",`${this.props.value}`);
   }
 
