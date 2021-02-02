@@ -261,6 +261,15 @@ function knightMoves(position,piece,board){
   return (knight_list);
 }
 
+function queenMoves(position,piece,board){
+  let queen_list = bishopMoves(position,piece,board);
+  let rookh_moves = rookhMoves(position,piece,board);
+  queen_list.push(...rookh_moves);
+
+  return queen_list
+
+}
+
 // function validMoves(possible_moves,position){
 //   let valid_moves_list = [];
 //   let cury = position[0]
@@ -283,28 +292,28 @@ function knightMoves(position,piece,board){
 // }
 
 function move(start,end,piece,board){
+  let move_list = [];
   if (piece === 'wki' || piece === 'bki'){
-    console.log(kingMoves(start,piece,board));
+    move_list = kingMoves(start,piece,board);
   }
   if (piece === 'wpa' || piece === 'bpa'){
-    console.log(pawnMoves(start,piece,board));
+    move_list = pawnMoves(start,piece,board);
   }
   if (piece === 'wro' || piece === 'bro'){
-    console.log(rookhMoves(start,piece,board));
+    move_list = rookhMoves(start,piece,board);
   }
   if (piece === 'wbi' || piece === 'bbi'){
-    console.log(bishopMoves(start,piece,board));
+    move_list = bishopMoves(start,piece,board);
   }
   if (piece === 'wkn' || piece === 'bkn'){
-    console.log(knightMoves(start,piece,board));
+    move_list = knightMoves(start,piece,board);
   }
+  if (piece === 'wqu' || piece === 'bqu'){
+    move_list = queenMoves(start,piece,board);
+  }
+  console.log(piece);
+  console.log(move_list);
 
-  // let startx,starty;
-  // starty = start[0];
-  // startx = start[1];
-  // let possible_moves_list = possibleMoves(piece);
-  // let valid_moves_list = validMoves(possible_moves_list,[startx,starty]);
-  // console.log(valid_moves_list);
 }
 
 
