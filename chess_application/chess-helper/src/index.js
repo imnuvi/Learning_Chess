@@ -93,6 +93,7 @@ class Piece extends React.Component {
     e.dataTransfer.setData("piece_type",`${this.props.value}`);
     e.dataTransfer.setData("piece_row",`${this.props.row}`);
     e.dataTransfer.setData("piece_column",`${this.props.column}`);
+    e.dataTransfer.effectAllowed = 'linkAA';
     // e.dataTransfer.setData("piece_type",`${this.props.value}`);
   }
 
@@ -214,11 +215,6 @@ class Board extends React.Component {
   }
 
   handleDrop = (e) => {
-    console.log(e.dataTransfer.getData("piece_type"));
-    console.log(e.dataTransfer.getData("piece_row"));
-    console.log(e.dataTransfer.getData("piece_column"));
-    console.log(e.target.attributes.getNamedItem('row').value);
-
     let piece_type = e.dataTransfer.getData("piece_type");
     let start_row = parseInt(e.dataTransfer.getData("piece_row"));
     let start_column = parseInt(e.dataTransfer.getData("piece_column"));
@@ -234,13 +230,11 @@ class Board extends React.Component {
       board_data: changed_board
     });
 
-    console.log(start_row,start_column);
-    // this.state.board_data
     e.preventDefault()
   }
 
   renderSquare(i,j){
-    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}  pieceClicked={() => {this.pieceClicked(i,j)}} onDrop={this.handleDrop} />) : (null);
+    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]} onDrop={this.handleDrop} />) : (null);
     return(
       <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}} onDrop={this.handleDrop} onDragOver={this.handleDragOver}>
           {piece}
