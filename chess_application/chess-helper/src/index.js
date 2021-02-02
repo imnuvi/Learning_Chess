@@ -222,8 +222,12 @@ class Board extends React.Component {
     let piece_type = e.dataTransfer.getData("piece_type");
     let start_row = parseInt(e.dataTransfer.getData("piece_row"));
     let start_column = parseInt(e.dataTransfer.getData("piece_column"));
+
+    let end_row = parseInt(e.target.attributes.getNamedItem('row').value);
+    let end_column = parseInt(e.target.attributes.getNamedItem('column').value);
+
     const changed_board = this.state.board_data.slice();
-    changed_board[start_row][start_column] = piece_type;
+    changed_board[end_row][end_column] = piece_type;
 
     this.setState({
       board_data: changed_board
