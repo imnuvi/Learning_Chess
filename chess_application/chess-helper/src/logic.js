@@ -78,19 +78,54 @@ function rookhMoves(position,piece,board){
   let left_branch = true;
   let right_branch = true;
 
+  let friend = piece.charAt(0);
+  let enemy = (friend === 'b') ? 'w' : 'b';
+
 
   for (let i=1; i<7; i++){
     if (oldx+i <= 7 && bottom_branch){
-       
+       if (board[oldx+i][oldy] === null){
+         rookh_list.push([oldx+i,oldy]);
+         continue
+       }
+       if (board[oldx+i][oldy].charAt(0) === enemy){
+         rookh_list.push([oldx+i,oldy]);
+         bottom_branch = false;
+         continue
+       }
     }
     if (oldx-i >= 0 && top_branch){
-
+      if (board[oldx-i][oldy] === null){
+        rookh_list.push([oldx-i,oldy]);
+        continue
+      }
+      if (board[oldx-i][oldy].charAt(0) === enemy){
+        rookh_list.push([oldx-i,oldy]);
+        top_branch = false;
+        continue
+      }
     }
     if (oldy+i <= 7 && right_branch){
-
+      if (board[oldx][oldy+i] === null){
+        rookh_list.push([oldx-i,oldy]);
+        continue
+      }
+      if (board[oldx][oldy+i].charAt(0) === enemy){
+        rookh_list.push([oldx,oldy+i]);
+        right_branch = false;
+        continue
+      }
     }
     if (oldy-i >= 0 && left_branch){
-
+      if (board[oldx][oldy-i] === null){
+        rookh_list.push([oldx-i,oldy]);
+        continue
+      }
+      if (board[oldx][oldy-i].charAt(0) === enemy){
+        rookh_list.push([oldx,oldy-i]);
+        left_branch = false;
+        continue
+      }
     }
   }
 
