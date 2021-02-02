@@ -1,37 +1,39 @@
 
 
-function possibleMoves(piece){
-  let possible_moves_list = [];
-  if (piece === 'wki' || piece === 'bki'){
-    for (let i=-1; i<=1; i++){
-      for (let j=-1; j<=1; j++){
-        if (i===0 && j===0){
-          continue;
-        }
-        possible_moves_list.push([i,j]);
-      }
-    }
-    return (possible_moves_list);
-  }
-  if (piece === 'wro' || piece === 'bro'){
-    for (let i=-7; i<=7; i++){
-      if (i===0){
-        continue;
-      }
-      possible_moves_list.push([i,0],[0,i]);
-    }
-    return (possible_moves_list);
-  }
-  if (piece === 'wbi' || piece === 'bbi'){
-    for (let i=-7; i<=7; i++){
-      if (i===0){
-        continue;
-      }
-      possible_moves_list.push([i,-i],[i,i]);
-    }
-    return (possible_moves_list);
-  }
-}
+
+
+// function possibleMoves(piece){
+//   let possible_moves_list = [];
+//   if (piece === 'wki' || piece === 'bki'){
+//     for (let i=-1; i<=1; i++){
+//       for (let j=-1; j<=1; j++){
+//         if (i===0 && j===0){
+//           continue;
+//         }
+//         possible_moves_list.push([i,j]);
+//       }
+//     }
+//     return (possible_moves_list);
+//   }
+//   if (piece === 'wro' || piece === 'bro'){
+//     for (let i=-7; i<=7; i++){
+//       if (i===0){
+//         continue;
+//       }
+//       possible_moves_list.push([i,0],[0,i]);
+//     }
+//     return (possible_moves_list);
+//   }
+//   if (piece === 'wbi' || piece === 'bbi'){
+//     for (let i=-7; i<=7; i++){
+//       if (i===0){
+//         continue;
+//       }
+//       possible_moves_list.push([i,-i],[i,i]);
+//     }
+//     return (possible_moves_list);
+//   }
+// }
 
 function validMoves(possible_moves,position){
   let valid_moves_list = [];
