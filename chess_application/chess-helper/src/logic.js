@@ -137,6 +137,30 @@ function rookhMoves(position,piece,board){
   return (rookh_list);
 }
 
+
+function bishopMoves(position,piece,board){
+  let bishop_list = [];
+  let newx, newy;
+  let oldx = position[0];
+  let oldy = position[1];
+
+  let tl_branch = true;
+  let tr_branch = true;
+  let bl_branch = true;
+  let br_branch = true;
+  let friend = piece.charAt(0);
+  let enemy = (friend === 'b') ? 'w' : 'b';
+
+  for (let i=1; i<=7; i++){
+
+  }
+
+
+
+
+
+}
+
 // function validMoves(possible_moves,position){
 //   let valid_moves_list = [];
 //   let cury = position[0]
