@@ -227,6 +227,7 @@ class Board extends React.Component {
     let end_column = parseInt(e.target.attributes.getNamedItem('column').value);
 
     const changed_board = this.state.board_data.slice();
+    changed_board[start_row][start_column] = null;
     changed_board[end_row][end_column] = piece_type;
 
     this.setState({
