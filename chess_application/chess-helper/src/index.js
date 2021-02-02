@@ -96,7 +96,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div id={this.props.id} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} draggable='true' >
+      <div id={this.props.id} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} draggable='true' onDragStart={this.handleDragStart} onDrop={this.props.onDrop}>
       </div>
     )
   }
@@ -220,7 +220,7 @@ class Board extends React.Component {
   }
 
   renderSquare(i,j){
-    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} value={this.state.board_data[i][j]}  pieceClicked={() => {this.pieceClicked(i,j)}}/>) : (null);
+    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}  pieceClicked={() => {this.pieceClicked(i,j)}} onDrop={this.handleDrop} />) : (null);
     return(
       <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}} onDrop={this.handleDrop} onDragOver={this.handleDragOver}>
           {piece}
