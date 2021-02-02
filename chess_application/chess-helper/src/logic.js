@@ -293,6 +293,7 @@ function queenMoves(position,piece,board){
 
 function move(start,end,piece,board){
   let move_list = [];
+
   if (piece === 'wki' || piece === 'bki'){
     move_list = kingMoves(start,piece,board);
   }
@@ -311,8 +312,26 @@ function move(start,end,piece,board){
   if (piece === 'wqu' || piece === 'bqu'){
     move_list = queenMoves(start,piece,board);
   }
-  console.log(piece);
-  console.log(move_list);
+
+  let string_moves = move_list.map((x) => {
+    return x.reduce((val,summer) => {
+      return val.toString() + summer;
+    })
+  })
+  // console.log(string_moves)
+  // console.log(piece);
+  // console.log(move_list);
+  // // console.log(end);
+
+  let end_string = end[0].toString() + end[1].toString();
+
+  // console.log(end_string);
+  if (string_moves.includes(end_string)){
+    return true;
+  }
+  else{
+    return false;
+  }
 
 }
 

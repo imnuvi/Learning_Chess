@@ -100,7 +100,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} draggable='true' onDragStart={this.handleDragStart} onDrop={this.props.onDrop} onClick={this.props.onClick}>
+      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} draggable='true' onDragStart={this.handleDragStart} onDrop={this.props.onDrop} >
       </div>
     )
   }
@@ -226,19 +226,26 @@ class Board extends React.Component {
     let end_row = parseInt(e.target.attributes.getNamedItem('row').value);
     let end_column = parseInt(e.target.attributes.getNamedItem('column').value);
 
-    const changed_board = this.state.board_data.slice();
-    changed_board[start_row][start_column] = null;
-    changed_board[end_row][end_column] = piece_type;
+    let start = [start_row,start_column];
+    let end = [end_row,end_column];
 
-    this.setState({
-      board_data: changed_board
-    });
+    // console.log(move(start,end,piece_type,this.state.board_data));
+
+    if (move(start,end,piece_type,this.state.board_data)){
+      const changed_board = this.state.board_data.slice();
+      changed_board[start_row][start_column] = null;
+      changed_board[end_row][end_column] = piece_type;
+
+      this.setState({
+        board_data: changed_board
+      });
+    }
 
     e.preventDefault()
   }
 
   renderSquare(i,j){
-    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]} onDrop={this.handleDrop} onClick={() => {this.handleClick(i,j)}} />) : (null);
+    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]} onDrop={this.handleDrop} />) : (null);
     return(
       <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}} onDrop={this.handleDrop} onDragOver={this.handleDragOver}>
           {piece}
