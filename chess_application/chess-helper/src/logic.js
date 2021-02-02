@@ -1,5 +1,27 @@
 
 
+function kingMoves(position,piece,board){
+  let king_list = [];
+  let newx, newy;
+  let loc;
+  let oldx = position[0];
+  let oldy = position[1];
+  let cur_piece;
+  for (let i=-1; i<=1; i++){
+    for (let j=-1; j<=1; j++){
+      newx =  oldx + i;
+      newy =  oldy + j;
+      // loc = [newx,newy];
+      cur_piece = board[newx][newy];
+      if ((i===0 && j===0) || (newx < 0) || (newx > 7) || (newy < 0) || (newy > 7) || ((cur_piece != null) && (cur_piece.charAt(0) === piece.charAt(0))) ){
+        continue;
+      }
+      king_list.push([i,j]);
+    }
+  }
+
+  return (king_list);
+}
 
 
 // function possibleMoves(piece){
@@ -57,12 +79,15 @@ function validMoves(possible_moves,position){
 }
 
 function move(start,end,piece,board){
-  let startx,starty;
-  starty = start[0];
-  startx = start[1];
-  let possible_moves_list = possibleMoves(piece);
-  let valid_moves_list = validMoves(possible_moves_list,[startx,starty]);
-  console.log(valid_moves_list);
+  if (piece === 'wki' || piece === 'bki'){
+    console.log(kingMoves(start,piece,board));
+  }
+  // let startx,starty;
+  // starty = start[0];
+  // startx = start[1];
+  // let possible_moves_list = possibleMoves(piece);
+  // let valid_moves_list = validMoves(possible_moves_list,[startx,starty]);
+  // console.log(valid_moves_list);
 }
 
 
