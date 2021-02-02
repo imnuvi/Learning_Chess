@@ -27,7 +27,8 @@ function pawnMoves(position,piece,board){
   let oldx = position[0];
   let oldy = position[1];
 
-  let tempval = ((piece.charAt(0) === 'b') ? 1 : -1 ;
+  let tempval;
+  tempval = ((piece.charAt(0) === 'b') ? 1 : -1 );
 
 
   // if (oldx+1 = 7){
@@ -41,15 +42,16 @@ function pawnMoves(position,piece,board){
   if (board[oldx+tempval][oldy] === null){
     pawn_list.push([oldx+tempval,oldy]);
   }
-  if ((tempval>0){
+
+  if (tempval>0){
     if ((oldx === 1) && board[oldx+(2*tempval)][oldy] === null){
       pawn_list.push([oldx+(2*tempval),oldy]);
     }
 
-    if (oldy+1 <= 7 && oldx+1 <= 7 && board[oldx+1][oldy+1].charAt(0) === 'w'){
+    if ((oldy+1 <= 7) && (oldx+1 <= 7) && (board[oldx+1][oldy+1] != null) && (board[oldx+1][oldy+1].charAt(0) === 'w')){
       pawn_list.push([oldx+1,oldy+1]);
     }
-    if (oldy-1 >= 0 && oldx+1 <= 7 && board[oldx+1][oldy-1].charAt(0) === 'w'){
+    if ((oldy-1 >= 0) && (oldx+1 <= 7) && (board[oldx+1][oldy-1] != null) && (board[oldx+1][oldy-1].charAt(0) === 'w')){
       pawn_list.push([oldx+1,oldy-1]);
     }
   }
@@ -59,31 +61,32 @@ function pawnMoves(position,piece,board){
       pawn_list.push([oldx+(2*tempval),oldy]);
     }
 
-    if (oldy+1 <= 7 && oldx-1 <= 7 && board[oldx-1][oldy+1].charAt(0) === 'b'){
+    if ((oldy+1 <= 7) && (oldx-1 <= 7) && (board[oldx-1][oldy+1] != null) && (board[oldx-1][oldy+1].charAt(0) === 'b')){
       pawn_list.push([oldx-1,oldy+1]);
     }
-    if (oldy-1 >= 0 && oldx-1 <= 7 && board[oldx-1][oldy-1].charAt(0) === 'b'){
+    if ((oldy-1 >= 0) && (oldx-1 <= 7) && (board[oldx-1][oldy-1] != null) && (board[oldx-1][oldy-1].charAt(0) === 'b')){
       pawn_list.push([oldx-1,oldy-1]);
     }
   }
 
-  if ()
 
-  else{
-    // if (oldx-1 < 0){
-    //   return [];
-    // }
-    if (board[oldx-1][oldy] === null){
-      pawn_list.push([oldx-1,oldy]);
-    }
-  }
 
-  if ((piece.charAt(0) === 'b' && oldx === 1) && (board[oldx+1][oldy] === null)){
-    pawn_list.push([oldx+2,oldy])
-  }
-  if (piece.charAt(0) === 'w' && oldx === 6){
 
-  }
+  // else{
+  //   // if (oldx-1 < 0){
+  //   //   return [];
+  //   // }
+  //   if (board[oldx-1][oldy] === null){
+  //     pawn_list.push([oldx-1,oldy]);
+  //   }
+  // }
+  //
+  // if ((piece.charAt(0) === 'b' && oldx === 1) && (board[oldx+1][oldy] === null)){
+  //   pawn_list.push([oldx+2,oldy])
+  // }
+  // if (piece.charAt(0) === 'w' && oldx === 6){
+  //
+  // }
 
   return (pawn_list);
 }
@@ -113,6 +116,10 @@ function move(start,end,piece,board){
   if (piece === 'wki' || piece === 'bki'){
     console.log(kingMoves(start,piece,board));
   }
+  if (piece === 'wpa' || piece === 'bpa'){
+    console.log(pawnMoves(start,piece,board));
+  }
+
   // let startx,starty;
   // starty = start[0];
   // startx = start[1];
