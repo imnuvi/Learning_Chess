@@ -3,13 +3,31 @@
 function possibleMoves(piece){
   let possible_moves_list = [];
   if (piece === 'wki' || piece === 'bki'){
-    for (let i=-1; i<2; i++){
-      for (let j=-1; j<2; j++){
+    for (let i=-1; i<=1; i++){
+      for (let j=-1; j<=1; j++){
         if (i===0 && j===0){
           continue;
         }
         possible_moves_list.push([i,j]);
       }
+    }
+    return (possible_moves_list);
+  }
+  if (piece === 'wro' || piece === 'bro'){
+    for (let i=-7; i<=7; i++){
+      if (i===0){
+        continue;
+      }
+      possible_moves_list.push([i,0],[0,i]);
+    }
+    return (possible_moves_list);
+  }
+  if (piece === 'wbi' || piece === 'bbi'){
+    for (let i=-7; i<=7; i++){
+      if (i===0){
+        continue;
+      }
+      possible_moves_list.push([i,-i],[i,i]);
     }
     return (possible_moves_list);
   }
@@ -36,9 +54,12 @@ function validMoves(possible_moves,position){
   return valid_moves_list
 }
 
-function move(start,end,piece){
+function move(start,end,piece,board){
+  let startx,starty;
+  starty = start[0];
+  startx = start[1];
   let possible_moves_list = possibleMoves(piece);
-  let valid_moves_list = validMoves(possible_moves_list,[0,4]);
+  let valid_moves_list = validMoves(possible_moves_list,[startx,starty]);
   console.log(valid_moves_list);
 }
 

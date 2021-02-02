@@ -211,7 +211,7 @@ class Board extends React.Component {
   }
 
   handleClick(i,j){
-    move(i,j,this.state.board_data[i][j])
+    move([i,j],[i,j],this.state.board_data[i][j],this.state.board_data)
   }
 
   handleDragOver = (e) => {
