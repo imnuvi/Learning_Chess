@@ -26,8 +26,60 @@ function pawnMoves(position,piece,board){
   let newx, newy;
   let oldx = position[0];
   let oldy = position[1];
-  if (piece.charAt(0) === 'b' && oldx === 1){
 
+  let tempval = ((piece.charAt(0) === 'b') ? 1 : -1 ;
+
+
+  // if (oldx+1 = 7){
+  //   return [];
+  // }
+
+  if (oldx === 7  || oldx === 0){
+    return [];
+  }
+
+  if (board[oldx+tempval][oldy] === null){
+    pawn_list.push([oldx+tempval,oldy]);
+  }
+  if ((tempval>0){
+    if ((oldx === 1) && board[oldx+(2*tempval)][oldy] === null){
+      pawn_list.push([oldx+(2*tempval),oldy]);
+    }
+
+    if (oldy+1 <= 7 && oldx+1 <= 7 && board[oldx+1][oldy+1].charAt(0) === 'w'){
+      pawn_list.push([oldx+1,oldy+1]);
+    }
+    if (oldy-1 >= 0 && oldx+1 <= 7 && board[oldx+1][oldy-1].charAt(0) === 'w'){
+      pawn_list.push([oldx+1,oldy-1]);
+    }
+  }
+
+  if (tempval<0){
+    if ((oldx === 6) && board[oldx+(2*tempval)][oldy] === null){
+      pawn_list.push([oldx+(2*tempval),oldy]);
+    }
+
+    if (oldy+1 <= 7 && oldx-1 <= 7 && board[oldx-1][oldy+1].charAt(0) === 'b'){
+      pawn_list.push([oldx-1,oldy+1]);
+    }
+    if (oldy-1 >= 0 && oldx-1 <= 7 && board[oldx-1][oldy-1].charAt(0) === 'b'){
+      pawn_list.push([oldx-1,oldy-1]);
+    }
+  }
+
+  if ()
+
+  else{
+    // if (oldx-1 < 0){
+    //   return [];
+    // }
+    if (board[oldx-1][oldy] === null){
+      pawn_list.push([oldx-1,oldy]);
+    }
+  }
+
+  if ((piece.charAt(0) === 'b' && oldx === 1) && (board[oldx+1][oldy] === null)){
+    pawn_list.push([oldx+2,oldy])
   }
   if (piece.charAt(0) === 'w' && oldx === 6){
 
