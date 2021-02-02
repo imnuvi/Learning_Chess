@@ -202,6 +202,65 @@ function bishopMoves(position,piece,board){
   return (bishop_list);
 }
 
+function checkEmpty(location,board){
+  if (location[0] > 7 || location[1] > 7 || location[0] < 0 || location[1] < 0){
+    return "out"
+  }
+  else if (board[location[0]][location[1]] === null){
+    return "free"
+  }
+  else {
+    return board[location[0]][location[1]].charAt(0);
+  }
+}
+
+function knightMoves(position,piece,board){
+  let knight_list = [];
+  let oldx = position[0];
+  let oldy = position[1];
+  let friend = piece.charAt(0);
+  let enemy = (friend === 'b') ? 'w' : 'b';
+
+  let j;
+
+  for (let i=1; i<=2; i++){
+    j = ((i === 1) ? (2) : (1));
+    if (checkEmpty([oldx+i,oldy+j],board) !== "out"){
+      if (checkEmpty([oldx+i,oldy+j],board) === "free"){
+        knight_list.push([oldx+i,oldy+j]);
+      }
+      else if (checkEmpty([oldx+i,oldy+j],board) === enemy){
+        knight_list.push([oldx+i,oldy+j]);
+      }
+    }
+    if (checkEmpty([oldx-i,oldy-j],board) !== "out"){
+      if (checkEmpty([oldx-i,oldy-j],board) === "free"){
+        knight_list.push([oldx-i,oldy-j]);
+      }
+      else if (checkEmpty([oldx-i,oldy-j],board) === enemy){
+        knight_list.push([oldx-i,oldy-j]);
+      }
+    }
+    if (checkEmpty([oldx-i,oldy+j],board) !== "out"){
+      if (checkEmpty([oldx-i,oldy+j],board) === "free"){
+        knight_list.push([oldx-i,oldy+j]);
+      }
+      else if (checkEmpty([oldx-i,oldy+j],board) === enemy){
+        knight_list.push([oldx-i,oldy+j]);
+      }
+    }
+    if (checkEmpty([oldx+i,oldy-j],board) !== "out"){
+      if (checkEmpty([oldx+i,oldy-j],board) === "free"){
+        knight_list.push([oldx+i,oldy-j]);
+      }
+      else if (checkEmpty([oldx+i,oldy-j],board) === enemy){
+        knight_list.push([oldx+i,oldy-j]);
+      }
+    }
+  }
+  return (knight_list);
+}
+
 // function validMoves(possible_moves,position){
 //   let valid_moves_list = [];
 //   let cury = position[0]
@@ -235,6 +294,9 @@ function move(start,end,piece,board){
   }
   if (piece === 'wbi' || piece === 'bbi'){
     console.log(bishopMoves(start,piece,board));
+  }
+  if (piece === 'wkn' || piece === 'bkn'){
+    console.log(knightMoves(start,piece,board));
   }
 
   // let startx,starty;
