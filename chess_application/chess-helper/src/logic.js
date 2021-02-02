@@ -19,6 +19,8 @@ function kingMoves(position,piece,board){
   return (king_list);
 }
 
+
+
 function pawnMoves(position,piece,board){
   let pawn_list = [];
   let oldx = position[0];
@@ -62,6 +64,36 @@ function pawnMoves(position,piece,board){
   }
 
   return (pawn_list);
+}
+
+
+function rookhMoves(position,piece,board){
+  let rookh_list = [];
+  let newx, newy;
+  let oldx = position[0];
+  let oldy = position[1];
+
+  let top_branch = true;
+  let bottom_branch = true;
+  let left_branch = true;
+  let right_branch = true;
+
+
+  for (let i=1; i<7; i++){
+    if (oldx+i <= 7 && bottom_branch){
+       
+    }
+    if (oldx-i >= 0 && top_branch){
+
+    }
+    if (oldy+i <= 7 && right_branch){
+
+    }
+    if (oldy-i >= 0 && left_branch){
+
+    }
+  }
+
 }
 
 // function validMoves(possible_moves,position){
