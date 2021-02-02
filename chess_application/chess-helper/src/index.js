@@ -1,7 +1,7 @@
 import './static/css/style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { hello } from "./logic.js";
+import { move } from "./logic.js";
 
 class Piece extends React.Component {
   constructor(props){
@@ -100,7 +100,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} draggable='true' onDragStart={this.handleDragStart} onDrop={this.props.onDrop}>
+      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} draggable='true' onDragStart={this.handleDragStart} onDrop={this.props.onDrop} onClick={this.props.onClick}>
       </div>
     )
   }
@@ -210,8 +210,11 @@ class Board extends React.Component {
 
   }
 
-  handleDragOver = (e) => {
+  handleClick(i,j){
+    move(i,j,this.state.board_data[i][j])
+  }
 
+  handleDragOver = (e) => {
     e.preventDefault();
   }
 
@@ -235,7 +238,7 @@ class Board extends React.Component {
   }
 
   renderSquare(i,j){
-    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]} onDrop={this.handleDrop} />) : (null);
+    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]} onDrop={this.handleDrop} onClick={() => {this.handleClick(i,j)}} />) : (null);
     return(
       <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}} onDrop={this.handleDrop} onDragOver={this.handleDragOver}>
           {piece}
