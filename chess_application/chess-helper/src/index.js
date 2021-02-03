@@ -1,6 +1,7 @@
 import './static/css/style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { move } from "./logic.js";
 
 class Piece extends React.Component {
   constructor(props){
@@ -93,13 +94,13 @@ class Piece extends React.Component {
     e.dataTransfer.setData("piece_type",`${this.props.value}`);
     e.dataTransfer.setData("piece_row",`${this.props.row}`);
     e.dataTransfer.setData("piece_column",`${this.props.column}`);
-    e.dataTransfer.effectAllowed = 'linkAA';
+    e.dataTransfer.effectAllowed = 'link';
     // e.dataTransfer.setData("piece_type",`${this.props.value}`);
   }
 
   render(){
     return(
-      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} draggable='true' onDragStart={this.handleDragStart} onDrop={this.props.onDrop}>
+      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} style={{transform: this.state.changeStyle}} draggable='true' onDragStart={this.handleDragStart} onDrop={this.props.onDrop} >
       </div>
     )
   }
@@ -186,7 +187,8 @@ class Board extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        board_data : fresh_board
+        board_data : fresh_board,
+        isNext: 'white'
     };
   }
 
@@ -209,8 +211,11 @@ class Board extends React.Component {
 
   }
 
-  handleDragOver = (e) => {
+  handleClick(i,j){
+    move([i,j],[i,j],this.state.board_data[i][j],this.state.board_data)
+  }
 
+  handleDragOver = (e) => {
     e.preventDefault();
   }
 
@@ -222,13 +227,23 @@ class Board extends React.Component {
     let end_row = parseInt(e.target.attributes.getNamedItem('row').value);
     let end_column = parseInt(e.target.attributes.getNamedItem('column').value);
 
-    const changed_board = this.state.board_data.slice();
-    changed_board[start_row][start_column] = null;
-    changed_board[end_row][end_column] = piece_type;
+    let start = [start_row,start_column];
+    let end = [end_row,end_column];
 
-    this.setState({
-      board_data: changed_board
-    });
+    let isNext = (this.state.isNext === "white") ? "black" : "white";
+
+    // console.log(move(start,end,piece_type,this.state.board_data));
+    if (move(start,end,piece_type,this.state.board_data,this.state.isNext)){
+      const changed_board = this.state.board_data.slice();
+      changed_board[start_row][start_column] = null;
+      changed_board[end_row][end_column] = piece_type;
+
+
+      this.setState({
+        board_data: changed_board,
+        isNext: isNext
+      });
+    }
 
     e.preventDefault()
   }
