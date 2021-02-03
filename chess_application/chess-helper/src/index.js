@@ -187,7 +187,8 @@ class Board extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        board_data : fresh_board
+        board_data : fresh_board,
+        isNext: 'white'
     };
   }
 
@@ -229,15 +230,18 @@ class Board extends React.Component {
     let start = [start_row,start_column];
     let end = [end_row,end_column];
 
-    // console.log(move(start,end,piece_type,this.state.board_data));
+    let isNext = (this.state.isNext === "white") ? "black" : "white";
 
-    if (move(start,end,piece_type,this.state.board_data)){
+    // console.log(move(start,end,piece_type,this.state.board_data));
+    if (move(start,end,piece_type,this.state.board_data,this.state.isNext)){
       const changed_board = this.state.board_data.slice();
       changed_board[start_row][start_column] = null;
       changed_board[end_row][end_column] = piece_type;
 
+
       this.setState({
-        board_data: changed_board
+        board_data: changed_board,
+        isNext: isNext
       });
     }
 

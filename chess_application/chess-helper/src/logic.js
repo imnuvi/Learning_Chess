@@ -291,7 +291,7 @@ function queenMoves(position,piece,board){
 //   return valid_moves_list
 // }
 
-function move(start,end,piece,board){
+function move(start,end,piece,board,turn){
   let move_list = [];
 
   if (piece === 'wki' || piece === 'bki'){
@@ -326,7 +326,7 @@ function move(start,end,piece,board){
   let end_string = end[0].toString() + end[1].toString();
 
   // console.log(end_string);
-  if (string_moves.includes(end_string)){
+  if (string_moves.includes(end_string) && (turn.charAt(0) === piece.charAt(0))){
     return true;
   }
   else{
