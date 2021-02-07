@@ -1,5 +1,70 @@
 
 
+// let fresh_board = new Array(8).fill(null).map(() => new Array(8).fill("bbi"));
+
+function board_reset(){
+  let newb = new Array(8).fill(null).map(() => new Array(8).fill(null));
+  for (let i=0; i<newb.length; i++){
+    for (let j=0; j<newb[0].length; j++){
+      if (i===1){
+        newb[i][j] = "bpa";
+      }
+      if (i===6){
+        newb[i][j] = "wpa";
+      }
+      if (j===0 || j===7){
+        if (i===0){
+          newb[i][j] = "bro";
+        }
+        else if (i===7){
+          newb[i][j] = "wro";
+        }
+      }
+
+      if (j===1 || j===6){
+        if (i===0){
+          newb[i][j] = "bkn";
+        }
+        else if (i===7){
+          newb[i][j] = "wkn";
+        }
+      }
+
+      if (j===2 || j===5){
+        if (i===0){
+          newb[i][j] = "bbi";
+        }
+        else if (i===7){
+          newb[i][j] = "wbi";
+        }
+      }
+
+      if (j===3){
+        if (i===0){
+          newb[i][j] = "bqu";
+        }
+        else if (i===7){
+          newb[i][j] = "wqu";
+        }
+      }
+
+      if (j===4){
+        if (i===0){
+          newb[i][j] = "bki";
+        }
+        else if (i===7){
+          newb[i][j] = "wki";
+        }
+      }
+
+    }
+  }
+  return newb
+}
+
+// fresh_board = board_reset(fresh_board);
+
+
 function kingMoves(position,piece,board){
   let king_list = [];
   let newx, newy;
@@ -336,4 +401,4 @@ function move(start,end,piece,board,turn){
 }
 
 
-export { move };
+export { move, board_reset };

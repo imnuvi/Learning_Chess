@@ -1,7 +1,7 @@
 import './static/css/style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { move } from "./logic.js";
+import { move, board_reset } from "./logic.js";
 
 class Piece extends React.Component {
   constructor(props){
@@ -116,78 +116,12 @@ class Square extends React.Component {
   }
 }
 
-
-
-let fresh_board = new Array(8).fill(null).map(() => new Array(8).fill("bbi"));
-
-function board_reset(board){
-  let newb = new Array(8).fill(null).map(() => new Array(8).fill(null));
-  for (let i=0; i<board.length; i++){
-    for (let j=0; j<board[0].length; j++){
-      if (i===1){
-        newb[i][j] = "bpa";
-      }
-      if (i===6){
-        newb[i][j] = "wpa";
-      }
-      if (j===0 || j===7){
-        if (i===0){
-          newb[i][j] = "bro";
-        }
-        else if (i===7){
-          newb[i][j] = "wro";
-        }
-      }
-
-      if (j===1 || j===6){
-        if (i===0){
-          newb[i][j] = "bkn";
-        }
-        else if (i===7){
-          newb[i][j] = "wkn";
-        }
-      }
-
-      if (j===2 || j===5){
-        if (i===0){
-          newb[i][j] = "bbi";
-        }
-        else if (i===7){
-          newb[i][j] = "wbi";
-        }
-      }
-
-      if (j===3){
-        if (i===0){
-          newb[i][j] = "bqu";
-        }
-        else if (i===7){
-          newb[i][j] = "wqu";
-        }
-      }
-
-      if (j===4){
-        if (i===0){
-          newb[i][j] = "bki";
-        }
-        else if (i===7){
-          newb[i][j] = "wki";
-        }
-      }
-
-    }
-  }
-  return newb
-}
-
-fresh_board = board_reset(fresh_board);
-
 class Board extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
-        board_data : fresh_board,
+        board_data : board_reset(),
         isNext: 'white',
         flipped: true
     };
