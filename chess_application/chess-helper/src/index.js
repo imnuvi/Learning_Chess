@@ -35,14 +35,20 @@ class Piece extends React.Component {
     });
   }
 
-  handleClick = (e) => {
-    // console.log(e);
+  handleMouseDown = (e) => {
+    console.log(e);
     console.log(e.screenX,e.screenY);
+    this.setState({
+      newX: e.pageX,
+      newY: e.pageY,
+      changeStyle: `translate(${e.pageX-this.state.originalX-(this.state.piece_width/2)}px, ${e.pageY-this.state.originalY-(this.state.piece_height/2)}px)`,
+      moving: true
+    });
   }
 
   render(){
     return(
-      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } ref={this.myRef} onClick={this.handleClick}>
+      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } style={{ transform : this.state.changeStyle}} ref={this.myRef} onMouseDown={this.handleMouseDown}>
       </div>
     )
   }
