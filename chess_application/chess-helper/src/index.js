@@ -105,8 +105,19 @@ class Board extends React.Component {
   }
 
   renderPieces(){
+    let dupe_data = this.state.board_data.slice();
+    let piece_list = [];
+    for (let i=0; i<dupe_data.length; i++){
+      for (let j=0; i<dupe_data[0].length; i++){
+        if (dupe_data[i][j] === null) {
+          continue;
+        }
+        else{
+          piece_list.push(<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>);
+        }
+    }}
     <div className="Pieces">
-      {{}}
+      {piece_list}
     </div>
   }
 
