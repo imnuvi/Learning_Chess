@@ -104,6 +104,12 @@ class Board extends React.Component {
     e.preventDefault()
   }
 
+  renderPieces(){
+    <div className="Pieces">
+      {{}}
+    </div>
+  }
+
   renderSquare(i,j){
     const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>) : (null);
     return(
@@ -136,6 +142,7 @@ class Board extends React.Component {
       <div>
         <div>This is status</div>
         {this.renderBoard()}
+        {this.renderPieces()}
       </div>
     )
   }
