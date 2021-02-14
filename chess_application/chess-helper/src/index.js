@@ -165,7 +165,6 @@ class Game extends React.Component {
   render() {
     return(
       <div className='Game'>
-        <p>Hello world !</p>
         <Board />
       </div>
     );
