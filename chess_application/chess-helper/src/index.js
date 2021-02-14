@@ -113,12 +113,14 @@ class Board extends React.Component {
           continue;
         }
         else{
-          piece_list.push(<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>);
+          piece_list.push(<Piece id={`piece${i}${j}`} key={`piece ${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>);
         }
     }}
-    <div className="Pieces">
-      {piece_list}
-    </div>
+    return(
+      <div className="Pieces">
+        {piece_list}
+      </div>
+    );
   }
 
   renderSquare(i,j){
