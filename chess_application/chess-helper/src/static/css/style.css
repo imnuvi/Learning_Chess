@@ -10,6 +10,7 @@ html, head, body, div, title, p, h1, h2 {
 
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
+  height: 100%;
   text-align: center;
 }
 
@@ -19,9 +20,10 @@ body {
   color: white;
 }
 
-.game {
+.Game {
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
 
 .Board {
@@ -34,6 +36,10 @@ body {
   image-rendering: pixelated;
   background-size: 100% 100%;
   background-repeat: no-repeat;
+}
+
+.Pieces {
+  height: 100%;
 }
 
 .board-row {
