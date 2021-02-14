@@ -108,14 +108,14 @@ class Board extends React.Component {
     let dupe_data = this.state.board_data.slice();
     let piece_list = [];
     for (let i=0; i<dupe_data.length; i++){
-      for (let j=0; i<dupe_data[0].length; i++){
+      for (let j=0; j<dupe_data[0].length; j++){
         if (dupe_data[i][j] === null) {
           continue;
         }
         else{
-          piece_list.push(<Piece id={`piece${i}${j}`} key={`piece ${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>);
+          piece_list.push(<Piece id={`piece ${i}${j}`} key={`piece ${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>);
         }
-    }}
+    }};
     return(
       <div className="Pieces">
         {piece_list}
