@@ -17,18 +17,22 @@ class Piece extends React.Component {
       newX: 0,
       newY: 0,
       moving: false,
-      changeStyle: ''
+      changeStyle: `translate(0px, 0px)`
     };
   }
 
   componentDidMount(){
     const boundingBox = this.myRef.current.getBoundingClientRect()
 
+    let origX = boundingBox.left;
+    let origY = boundingBox.top;
+
     this.setState({
-      originalX: boundingBox.left,
-      originalY: boundingBox.top,
+      originalX: origX,
+      originalY: origY,
       newX: boundingBox.left,
       newY: boundingBox.top,
+      changeStyle: `translate(${(this.state.piece_width/2)}px, ${(this.state.piece_height/2)}px)`,
       piece_width: boundingBox.width,
       piece_height: boundingBox.height,
       moving: false
@@ -38,10 +42,13 @@ class Piece extends React.Component {
   handleMouseDown = (e) => {
     console.log(e);
     console.log(e.screenX,e.screenY);
+    let devX = e.pageX;
+    let devY = e.pageY;
+    console.log(devX,devY);
     this.setState({
-      newX: e.pageX,
-      newY: e.pageY,
-      changeStyle: `translate(${e.pageX-this.state.originalX-(this.state.piece_width/2)}px, ${e.pageY-this.state.originalY-(this.state.piece_height/2)}px)`,
+      newX: devX,
+      newY: devY,
+      changeStyle: `translate(${devX-this.state.originalX-(this.state.piece_width/2)}px, ${devY-this.state.originalY-(this.state.piece_height/2)}px)`,
       moving: true
     });
   }
@@ -55,10 +62,11 @@ class Piece extends React.Component {
 }
 
 class Square extends React.Component {
+
   render(){
     return(
       <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }>
-        {this.props.children}
+        
       </div>
     );
   }
@@ -124,10 +132,10 @@ class Board extends React.Component {
   }
 
   renderSquare(i,j){
-    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>) : (null);
+    // const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>) : (null);
     return(
       <Square  id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}}>
-          {piece}
+
       </Square>
 
     );
