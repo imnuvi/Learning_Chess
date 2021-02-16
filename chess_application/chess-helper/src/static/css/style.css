@@ -41,14 +41,6 @@ body {
   background-repeat: no-repeat;
 }
 
-.Pieces {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  margin: auto;
-}
-
 .board-row {
   display: inline-flex;
   width: fit-content;
@@ -72,10 +64,18 @@ body {
   z-index: -10;
 }
 
-.piece {
-  width: 100%;
+.Pieces {
+  position: absolute;
+  top: 0;
   height: 100%;
+}
+
+.piece {
+  width: 100px;
+  height: 100px;
   /* background: yellow; */
+  margin: 0px;
+  margin-right: 0px;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;

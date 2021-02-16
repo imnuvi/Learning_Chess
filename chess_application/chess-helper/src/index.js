@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { move, board_reset } from "./logic.js";
 
-let piece_width = 0;
-let piece_height = 0;
+let piece_width = 100;
+let piece_height = 100;
 
 class Piece extends React.Component {
   constructor(props){
@@ -13,8 +13,8 @@ class Piece extends React.Component {
     this.state = {
       piece_type: this.props.value,
       piece_position: [this.props.row,this.props.column],
-      piece_width: 0,
-      piece_height: 0,
+      piece_width: piece_width,
+      piece_height: piece_height,
       originalX: 0,
       originalY: 0,
       newX: 0,
@@ -37,8 +37,6 @@ class Piece extends React.Component {
       newX: boundingBox.left,
       newY: boundingBox.top,
       changeStyle: `translate(${(-origX+this.state.piece_width/2)}px, ${(-origY+this.state.piece_height/2)}px)`,
-      piece_width: boundingBox.width,
-      piece_height: boundingBox.height,
       moving: false
     });
   }
@@ -67,11 +65,6 @@ class Piece extends React.Component {
 
 class Square extends React.Component {
 
-  componentDidMount(){
-    // console.log(piece_width,piece_height);
-
-  }
-
   render(){
     return(
       <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }>
@@ -84,7 +77,6 @@ class Board extends React.Component {
 
   constructor(props){
     super(props);
-    this.squareRef = React.createRef();
     this.state = {
         board_data : board_reset(),
         isNext: 'white',
