@@ -24,6 +24,7 @@ body {
   width: fit-content;
   margin: auto;
   display: flex;
+  position: relative;
   flex-direction: row;
   height: 100%;
 }
@@ -41,7 +42,10 @@ body {
 }
 
 .Pieces {
+  position: fixed;
+  top: 0;
   height: 100%;
+  width: 100%;
 }
 
 .board-row {

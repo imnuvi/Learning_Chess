@@ -22,7 +22,8 @@ class Piece extends React.Component {
   }
 
   componentDidMount(){
-    const boundingBox = this.myRef.current.getBoundingClientRect()
+    const boundingBox = this.myRef.current.getBoundingClientRect();
+    // const boundingBox = this.props.squareRef.current.getBoundingClientRect();
 
     let origX = boundingBox.left;
     let origY = boundingBox.top;
@@ -32,7 +33,7 @@ class Piece extends React.Component {
       originalY: origY,
       newX: boundingBox.left,
       newY: boundingBox.top,
-      changeStyle: `translate(${(this.state.piece_width/2)}px, ${(this.state.piece_height/2)}px)`,
+      changeStyle: `translate(${(-origX+this.state.piece_width/2)}px, ${(-origY+this.state.piece_height/2)}px)`,
       piece_width: boundingBox.width,
       piece_height: boundingBox.height,
       moving: false
@@ -65,7 +66,7 @@ class Square extends React.Component {
 
   render(){
     return(
-      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }>
+      <div ref={this.props.squareRef} id={this.props.id} row={this.props.row} column={this.props.column} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }>
 
       </div>
     );
@@ -122,7 +123,7 @@ class Board extends React.Component {
           continue;
         }
         else{
-          piece_list.push(<Piece id={`piece ${i}${j}`} key={`piece ${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>);
+          piece_list.push(<Piece  squareRef={this.squareRef} id={`piece ${i}${j}`} key={`piece ${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>);
         }
     }};
     return(
@@ -135,7 +136,7 @@ class Board extends React.Component {
   renderSquare(i,j){
     // const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>) : (null);
     return(
-      <Square  ref={this.squareRef} id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}}>
+      <Square  squareRef={this.squareRef} id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}}>
 
       </Square>
 
@@ -155,6 +156,7 @@ class Board extends React.Component {
               </div>
             );
         })}
+        {this.renderPieces()}
       </div>
     );
   }
@@ -164,7 +166,7 @@ class Board extends React.Component {
       <div>
         <div>This is status</div>
         {this.renderBoard()}
-        {this.renderPieces()}
+
       </div>
     )
   }
