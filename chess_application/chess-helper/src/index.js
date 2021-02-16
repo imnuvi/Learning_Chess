@@ -3,6 +3,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { move, board_reset } from "./logic.js";
 
+let piece_width = 0;
+let piece_height = 0;
+
 class Piece extends React.Component {
   constructor(props){
     super(props);
@@ -64,10 +67,14 @@ class Piece extends React.Component {
 
 class Square extends React.Component {
 
+  componentDidMount(){
+    // console.log(piece_width,piece_height);
+
+  }
+
   render(){
     return(
-      <div ref={this.props.squareRef} id={this.props.id} row={this.props.row} column={this.props.column} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }>
-
+      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }>
       </div>
     );
   }
@@ -123,7 +130,7 @@ class Board extends React.Component {
           continue;
         }
         else{
-          piece_list.push(<Piece  squareRef={this.squareRef} id={`piece ${i}${j}`} key={`piece ${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>);
+          piece_list.push(<Piece id={`piece ${i}${j}`} key={`piece ${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>);
         }
     }};
     return(
@@ -136,7 +143,7 @@ class Board extends React.Component {
   renderSquare(i,j){
     // const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>) : (null);
     return(
-      <Square  squareRef={this.squareRef} id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}}>
+      <Square id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}}>
 
       </Square>
 
