@@ -156,7 +156,7 @@ class Board extends React.Component {
               </div>
             );
         })}
-        {this.renderPieces()}
+
       </div>
     );
   }
@@ -166,7 +166,7 @@ class Board extends React.Component {
       <div>
         <div>This is status</div>
         {this.renderBoard()}
-
+        {this.renderPieces()}
       </div>
     )
   }
