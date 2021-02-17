@@ -1,0 +1,181 @@
+
+// variables
+$piece_style : '32bit';
+$board : 'chess_board';
+$wbi: 'white_bishop';
+$wro: 'white_rookh';
+$wkn: 'white_knight';
+$wki: 'white_king';
+$wqu: 'white_queen';
+$wpa: 'white_pawn';
+
+$bbi: 'black_bishop';
+$bro: 'black_rookh';
+$bkn: 'black_knight';
+$bki: 'black_king';
+$bqu: 'black_queen';
+$bpa: 'black_pawn';
+
+
+// general resets
+html, head, body, div, title, p, h1, h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  height: 100%;
+  text-align: center;
+}
+
+
+.status {
+  margin: auto;
+  margin-bottom: 10px;
+  color: white
+}
+
+
+.Game {
+  width: fit-content;
+  margin: auto;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  height: 100%;
+}
+
+
+// board styles
+.Board {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: auto;
+  margin-top: 50px;
+
+
+
+  background-image: url('../chess_icons/board_images/#{$board}.png');
+  image-rendering: pixelated;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.board-row {
+  display: inline-flex;
+  width: fit-content;
+  white-space: normal;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #999;
+  float: left;
+  user-drag: none;
+}
+
+.square > img {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  z-index: -10;
+}
+
+.Pieces{
+  position: absolute;
+  top: 0;
+  height: 100%;
+  // width: 100%;
+  // margin: auto;
+}
+
+.piece {
+  width: 100px;
+  height: 100px;
+  /* background: yellow; */
+  margin: 0px;
+  margin-right: 0px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  background-color: transparent;
+
+  z-index: 1;
+
+}
+
+.piece:hover {
+  cursor: grab;
+}
+
+.piece:active {
+  cursor: grabbing;
+}
+
+
+
+// piece specifications
+
+.wbi {
+  background-image: url('../chess_icons/#{$piece_style}/#{$wbi}.png');
+}
+
+.wro {
+  background-image: url('../chess_icons/#{$piece_style}/#{$wro}.png');
+}
+
+.wkn {
+  background-image: url('../chess_icons/#{$piece_style}/#{$wkn}.png');
+}
+
+.wki {
+  background-image: url('../chess_icons/#{$piece_style}/#{$wki}.png');
+}
+
+.wqu {
+  background-image: url('../chess_icons/#{$piece_style}/#{$wqu}.png');
+}
+
+.wpa {
+  background-image: url('../chess_icons/#{$piece_style}/#{$wpa}.png');
+}
+
+
+
+.bbi {
+  background-image: url('../chess_icons/#{$piece_style}/#{$bbi}.png');
+}
+
+.bro {
+  background-image: url('../chess_icons/#{$piece_style}/#{$bro}.png');
+}
+
+.bkn {
+  background-image: url('../chess_icons/#{$piece_style}/#{$bkn}.png');
+}
+
+.bki {
+  background-image: url('../chess_icons/#{$piece_style}/#{$bki}.png');
+}
+
+.bqu {
+  background-image: url('../chess_icons/#{$piece_style}/#{$bqu}.png');
+}
+
+.bpa {
+  background-image: url('../chess_icons/#{$piece_style}/#{$bpa}.png');
+}
+
+// .dragged {
+//   background: yellow;
+// }
