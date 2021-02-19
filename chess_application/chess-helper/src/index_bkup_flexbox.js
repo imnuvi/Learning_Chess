@@ -13,10 +13,32 @@ class Piece extends React.Component {
     this.state = {
       piece_type: this.props.value,
       piece_position: [this.props.row,this.props.column],
+      piece_width: piece_width,
+      piece_height: piece_height,
+      originalX: 0,
+      originalY: 0,
+      newX: 0,
+      newY: 0,
+      moving: false,
+      changeStyle: `translate(0px, 0px)`
     };
   }
 
   componentDidMount(){
+    const boundingBox = this.myRef.current.getBoundingClientRect();
+    // const boundingBox = this.props.squareRef.current.getBoundingClientRect();
+
+    let origX = boundingBox.left;
+    let origY = boundingBox.top;
+
+    this.setState({
+      originalX: origX,
+      originalY: origY,
+      newX: boundingBox.left,
+      newY: boundingBox.top,
+      changeStyle: `translate(${(-origX+this.state.piece_width/2)}px, ${(-origY+this.state.piece_height/2)}px)`,
+      moving: false
+    });
   }
 
   handleMouseDown = (e) => {
@@ -25,11 +47,17 @@ class Piece extends React.Component {
     let devX = e.pageX;
     let devY = e.pageY;
     console.log(devX,devY);
+    this.setState({
+      newX: devX,
+      newY: devY,
+      changeStyle: `translate(${devX-this.state.originalX-(this.state.piece_width/2)}px, ${devY-this.state.originalY-(this.state.piece_height/2)}px)`,
+      moving: true
+    });
   }
 
   render(){
     return(
-      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } style={{ transform : this.state.changeStyle}} onMouseDown={this.handleMouseDown}>
+      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } style={{ transform : this.state.changeStyle}} ref={this.myRef} onMouseDown={this.handleMouseDown}>
       </div>
     )
   }
@@ -40,7 +68,6 @@ class Square extends React.Component {
   render(){
     return(
       <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }>
-        {this.props.children}
       </div>
     );
   }
@@ -106,10 +133,10 @@ class Board extends React.Component {
   }
 
   renderSquare(i,j){
-    const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>) : (null);
+    // const piece = (this.state.board_data[i][j] != null) ? (<Piece id={`piece${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>) : (null);
     return(
       <Square id={`${i}${j}`} key={i*10 + j} row={i} column={j} value={this.state.board_data[i][j]} updateMove={() => {this.updateMove(i,j)}}>
-        {piece}
+
       </Square>
 
     );
@@ -117,26 +144,18 @@ class Board extends React.Component {
 
   renderBoard(){
     let dupe_data = this.state.board_data.slice();
-    let square_list = []
-    let piece_list = []
-    for(let i=0; i<dupe_data.length; i++){
-      for(let j=0; j<dupe_data[0].length; j++){
-        if (dupe_data[i][j] === null) {
-          continue;
-        }
-        else{
-          piece_list.push(<Piece id={`piece ${i}${j}`} key={`piece ${i}${j}`} row={i} column={j} value={this.state.board_data[i][j]}/>);
-        }
-      }
-    }
-    for(let i=0; i<dupe_data.length; i++){
-      for(let j=0; j<dupe_data[0].length; j++){
-        square_list.push(this.renderSquare(i,j))
-      }
-    }
     return (
       <div className="Board">
-        {square_list}
+        {dupe_data.map((row,i) => {
+            return (
+              <div className="board-row" key={i} row={i}>
+                {row.map((block,j) => {
+                  return this.renderSquare(i,j);
+                })}
+              </div>
+            );
+        })}
+
       </div>
     );
   }
@@ -146,6 +165,7 @@ class Board extends React.Component {
       <div>
         <div>This is status</div>
         {this.renderBoard()}
+        {this.renderPieces()}
       </div>
     )
   }
@@ -162,7 +182,7 @@ class Game extends React.Component {
 }
 
 class PieceBoard extends React.Component {
-
+  
 }
 
 

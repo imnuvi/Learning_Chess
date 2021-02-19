@@ -10,6 +10,7 @@ html, head, body, div, title, p, h1, h2 {
 
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
+  height: 100%;
   text-align: center;
 }
 
@@ -19,13 +20,17 @@ body {
   color: white;
 }
 
-.game {
+.Game {
+  width: fit-content;
+  margin: auto;
   display: flex;
+  position: relative;
   flex-direction: row;
+  height: 100%;
 }
 
 .Board {
-  display: flex;
+  display: grid;
   flex-direction: column;
   width: fit-content;
   margin: auto;
@@ -59,10 +64,18 @@ body {
   z-index: -10;
 }
 
-.piece {
-  width: 100%;
+.Pieces {
+  position: absolute;
+  top: 0;
   height: 100%;
+}
+
+.piece {
+  width: 100px;
+  height: 100px;
   /* background: yellow; */
+  margin: 0px;
+  margin-right: 0px;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   image-rendering: pixelated;
