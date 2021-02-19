@@ -117,6 +117,7 @@ class Board extends React.Component {
 
   renderBoard(){
     let dupe_data = this.state.board_data.slice();
+    let square_list = []
     let piece_list = []
     for(let i=0; i<dupe_data.length; i++){
       for(let j=0; j<dupe_data[0].length; j++){
@@ -128,17 +129,14 @@ class Board extends React.Component {
         }
       }
     }
+    for(let i=0; i<dupe_data.length; i++){
+      for(let j=0; j<dupe_data[0].length; j++){
+        square_list.push(this.renderSquare(i,j))
+      }
+    }
     return (
       <div className="Board">
-        {dupe_data.map((row,i) => {
-            return (
-              <div className="board-row" key={i} row={i}>
-                {row.map((block,j) => {
-                  return this.renderSquare(i,j);
-                })}
-              </div>
-            );
-        })}
+        {square_list}
       </div>
     );
   }

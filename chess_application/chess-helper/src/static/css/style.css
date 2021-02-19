@@ -30,7 +30,7 @@ body {
 }
 
 .Board {
-  display: flex;
+  display: grid;
   flex-direction: column;
   width: fit-content;
   margin: auto;
