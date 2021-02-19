@@ -182,7 +182,7 @@ class Game extends React.Component {
 }
 
 class PieceBoard extends React.Component {
-  
+
 }
 
 
