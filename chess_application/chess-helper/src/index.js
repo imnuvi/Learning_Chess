@@ -13,10 +13,29 @@ class Piece extends React.Component {
     this.state = {
       piece_type: this.props.value,
       piece_position: [this.props.row,this.props.column],
+      piece_width: piece_width,
+      piece_height: piece_height,
+      originalX: 0,
+      originalY: 0,
+      newX: 0,
+      newY: 0,
+      moving: false,
+      changeStyle: `translate(0px, 0px)`
     };
   }
 
   componentDidMount(){
+    const boundingBox = this.myRef.current.getBoundingClientRect()
+
+    this.setState({
+      originalX: boundingBox.left,
+      originalY: boundingBox.top,
+      newX: boundingBox.left,
+      newY: boundingBox.top,
+      piece_width: boundingBox.width,
+      piece_height: boundingBox.height,
+      moving: false
+    });
   }
 
   handleMouseDown = (e) => {
@@ -25,11 +44,14 @@ class Piece extends React.Component {
     let devX = e.pageX;
     let devY = e.pageY;
     console.log(devX,devY);
+    this.setState({
+      changeStyle: `translate(${devX-this.state.originalX-(this.state.piece_width/2)}px, ${devY-this.state.originalY-(this.state.piece_height/2)}px)`,
+    });
   }
 
   render(){
     return(
-      <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } style={{ transform : this.state.changeStyle}} onMouseDown={this.handleMouseDown}>
+      <div ref={this.myRef} id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } style={{ transform : this.state.changeStyle}} onMouseDown={this.handleMouseDown}>
       </div>
     )
   }
