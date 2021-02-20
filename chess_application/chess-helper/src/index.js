@@ -50,11 +50,11 @@ class Piece extends React.Component {
   }
 
   handleMouseDown = (e) => {
-    console.log(e);
-    console.log(e.screenX,e.screenY);
+    // console.log(e);
+    // console.log(e.screenX,e.screenY);
     let devX = e.pageX;
     let devY = e.pageY;
-    console.log(devX,devY);
+    // console.log(devX,devY);
     this.setState({
       changeStyle: `translate(${devX-this.state.originalX-(this.state.piece_width/2)}px, ${devY-this.state.originalY-(this.state.piece_height/2)}px)`,
     });
@@ -71,7 +71,7 @@ class Piece extends React.Component {
   handleMouseMove = (e) => {
     let devX = e.pageX;
     let devY = e.pageY;
-    console.log(devX,devY);
+    // console.log(devX,devY);
     if (this.state.moving === true){
       this.setState({
         changeStyle: `translate(${devX-this.state.originalX-(this.state.piece_width/2)}px, ${devY-this.state.originalY-(this.state.piece_height/2)}px)`,
