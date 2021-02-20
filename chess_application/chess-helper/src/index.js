@@ -61,16 +61,27 @@ class Piece extends React.Component {
   }
 
   handleMouseUp = (e) => {
-    let devX = e.pageX;
-    let devY = e.pageY;
+    // let devX = e.pageX;
+    // let devY = e.pageY;
     this.setState({
       changeStyle: `translate(0px, 0px)`,
     })
   }
 
+  handleMouseMove = (e) => {
+    let devX = e.pageX;
+    let devY = e.pageY;
+    console.log(devX,devY);
+    if (this.state.moving === true){
+      this.setState({
+        changeStyle: `translate(${devX-this.state.originalX-(this.state.piece_width/2)}px, ${devY-this.state.originalY-(this.state.piece_height/2)}px)`,
+      });
+    }
+  }
+
   render(){
     return(
-      <div ref={this.myRef} id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } style={{ transform : this.state.changeStyle}} onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
+      <div ref={this.myRef} id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } style={{ transform : this.state.changeStyle}} onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp} draggable="true" onDrag={this.handleMouseMove} onDragStart={this.handleMouseDown} onDragEnd={this.handleMouseUp}>
       </div>
     )
   }
@@ -202,9 +213,9 @@ class Game extends React.Component {
   }
 }
 
-class PieceBoard extends React.Component {
-
-}
+// class PieceBoard extends React.Component {
+//
+// }
 
 
 ReactDOM.render(
