@@ -27,15 +27,26 @@ class Piece extends React.Component {
   componentDidMount(){
     const boundingBox = this.myRef.current.getBoundingClientRect()
 
+    let origX = boundingBox.left;
+    let origY = boundingBox.top;
+
     this.setState({
-      originalX: boundingBox.left,
-      originalY: boundingBox.top,
+      originalX: origX,
+      originalY: origY,
       newX: boundingBox.left,
       newY: boundingBox.top,
       piece_width: boundingBox.width,
       piece_height: boundingBox.height,
-      moving: false
+      moving: false,
+      changeStyle: `translate(0px, 0px)`,
     });
+    //
+    // this.setState({
+    //   originalX: boundingBox.left,
+    //   originalY: boundingBox.top,
+    //   newX: boundingBox.left,
+    //   newY: boundingBox.top
+    // });
   }
 
   handleMouseDown = (e) => {
@@ -49,9 +60,17 @@ class Piece extends React.Component {
     });
   }
 
+  handleMouseUp = (e) => {
+    let devX = e.pageX;
+    let devY = e.pageY;
+    this.setState({
+      changeStyle: `translate(0px, 0px)`,
+    })
+  }
+
   render(){
     return(
-      <div ref={this.myRef} id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } style={{ transform : this.state.changeStyle}} onMouseDown={this.handleMouseDown}>
+      <div ref={this.myRef} id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } style={{ transform : this.state.changeStyle}} onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
       </div>
     )
   }
