@@ -177,6 +177,7 @@ body {
   background-image: url('../chess_icons/#{$piece_style}/#{$bpa}.png');
 }
 
-// .dragged {
-//   background: yellow;
-// }
+.dragged {
+  // background: yellow;
+  z-index: 10;
+}

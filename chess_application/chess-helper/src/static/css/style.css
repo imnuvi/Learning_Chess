@@ -140,4 +140,8 @@ body {
   background-image: url("../chess_icons/32bit/black_pawn.png");
 }
 
+.dragged {
+  z-index: 10;
+}
+
 /*# sourceMappingURL=style.css.map */
