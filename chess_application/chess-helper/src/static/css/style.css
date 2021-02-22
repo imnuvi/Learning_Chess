@@ -141,7 +141,7 @@ body {
 }
 
 .dragged {
-  z-index: 10;
+  z-index: 100;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -83,7 +83,7 @@ class Piece extends React.Component {
 
   render(){
     return(
-      <div ref={this.myRef} id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } style={{ transform : this.state.changeStyle}} onMouseDown={this.handleMouseDown} onMouseMove={this.handleMouseMove} onMouseUp={this.handleMouseUp} onDrag={this.handleMouseMove} onDragStart={this.handleMouseDown}>
+      <div ref={this.myRef} id={this.props.id} row={this.props.row} column={this.props.column} className={ `piece ${this.props.value}${(this.state.moving)?(" dragged"):""}` } style={{ transform : this.state.changeStyle}} onMouseDown={this.handleMouseDown} onMouseMove={this.handleMouseMove} onMouseUp={this.handleMouseUp} onMouseLeave={this.handleMouseUp} draggable="false" onDrag={this.handleMouseMove} onDragStart={this.handleMouseDown}>
       </div>
     )
   }
@@ -91,7 +91,17 @@ class Piece extends React.Component {
 
 class Square extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      active: false,
+      z_index: '',
+    }
+  }
+
   render(){
+    // let activeElem = this.props.children.isMoving
+    // console.log(this.props.children)
     return(
       <div id={this.props.id} row={this.props.row} column={this.props.column} className={ `square ${((this.props.row+this.props.column)%2 === 0) ? "white-square" : "black-square"}` }>
         {this.props.children}
